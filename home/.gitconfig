@@ -1,0 +1,13 @@
+[user]
+	name = Jess Moore
+	email = jessclaremoore@gmail.com
+[diff]
+	colorMoved = zebra
+[fetch]
+	prune = true
+[pull]
+	rebase = true
+[safe]
+	directory = /Library/Ruby/Gems/2.6.0/bundler/gems/jekyll-autoprefixer-re-8f80c28fedc0
+[push]
+	autoSetupRemote = true
