@@ -21,25 +21,29 @@ help::
 
 ########################################################################
 
-# Get the output ~/bin filenames for scripts in ~/Documents/scripts
+# Get the output ~/bin filenames for scripts in scripts repo
+# Uses make syntax
 scriptfiles := $(shell ls ../*.sh)
-files_wo_paths := $(notdir ${scriptfiles})
-basefiles := $(basename ${files_wo_paths})
+# Removes dir and file suffix
+basefiles := $(basename $(notdir ${scriptfiles}))
+# Adds output dir ~/bin prefix
 execfiles := $(addprefix ~/bin/,${basefiles})
 fullexecfiles := $(strip $(foreach f,$(execfiles),$(wildcard $(f))))
 
 test: 
-	@echo "MY VAR IS ${scriptfiles}"
-	@echo "MY VAR IS ${files_wo_paths}"
-	@echo "MY VAR IS ${basefiles}"
-	@echo "MY_VAR IS ${execfiles}"
-	@echo "MY_VARS IS ${fullexecfiles}"
+	@echo "MY FILES ARE ${scriptfiles}"
+	@echo "MY FILES ARE ${basefiles}"
+	@echo "MY FILES ARE ${execfiles}"
+	@echo "MY FILES ARE ${fullexecfiles}"
 
+# Remove output ~/bin filenames if exist, if not provide sensible msg
+# This only removes the softlinks to scripts in scripts repo
 clean:	
-	ifneq ($(fullexecfiles),)
-		rm -f $(fullexecfiles)
-	endif
+ifneq (${fullexecfiles},)
+	rm -f $(fullexecfiles)
+endif
 
+# Install scripts from scripts repo in ~/bin
 install: 
 	for file in ../*.sh; do \
 		echo $${file}; \
