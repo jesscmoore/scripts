@@ -10,7 +10,7 @@ SHELL=/bin/bash
 
 define HELP
 
-	install		Developer install scripts locally
+	install		Install scripts locally
 
 endef
 export HELP
@@ -20,17 +20,24 @@ help::
 
 ########################################################################
 
+execfile := $(ls ~/bin/*.sh)
+# currdir = $(shell pwd)
+
+execfiles := $(strip $(foreach f,$(execfile),$(wildcard $(f))))
+		
+clean:	
+	ifneq ($(execfiles),)
+		rm -f $(execfiles)
+	endif
+
 install: 
-	echo "foo"
-	cd ..; for file in *.sh; do \
+	for file in ../*.sh; do \
 		echo $${file}; \
-		ls -lt $${file}; \
 		chmod u+x $${file}; \
-		ls -lt $${file}; \
-		basefile=$${file%%.*}; \
-		echo $${basefile}; \
-		[ -f ~/bin/$${basefile} ] && rm ~/bin/$${basefile}; \
-		ln -s $${file} ~/bin/$${basefile}; \
+		file_wo_path=$$(basename -- "$${file}"); \
+		basefile=$${file_wo_path%%.*}; \
+		currdir="$(shell pwd)"; \
+		ln -s $${currdir}/$${file} ~/bin/$${basefile}; \
 		echo "Added $${basefile} to ~/bin"; \
 	done 
 
