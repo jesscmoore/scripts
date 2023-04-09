@@ -1,6 +1,5 @@
 # Time-stamp: <Friday 2023-04-07 19:48:27 Jess Moore>
 #
-# SHELL := bash
 SHELL=/bin/bash
 
 ########################################################################
@@ -44,6 +43,7 @@ ifneq (${fullexecfiles},)
 endif
 
 # Install scripts from scripts repo in ~/bin
+# $$ req when calling var from within for loop line
 install: 
 	for file in ../*.sh; do \
 		echo $${file}; \
