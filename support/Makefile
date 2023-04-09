@@ -10,7 +10,8 @@ SHELL=/bin/bash
 
 define HELP
 
-	install		Install scripts locally
+	install     Install scripts locally
+	clean       Remove script output executables in ~/bin
 
 endef
 export HELP
@@ -20,14 +21,23 @@ help::
 
 ########################################################################
 
-execfile := $(ls ~/bin/*.sh)
-# currdir = $(shell pwd)
+# Get the output ~/bin filenames for scripts in ~/Documents/scripts
+scriptfiles := $(shell ls ../*.sh)
+files_wo_paths := $(notdir ${scriptfiles})
+basefiles := $(basename ${files_wo_paths})
+execfiles := $(addprefix ~/bin/,${basefiles})
+fullexecfiles := $(strip $(foreach f,$(execfiles),$(wildcard $(f))))
 
-execfiles := $(strip $(foreach f,$(execfile),$(wildcard $(f))))
-		
+test: 
+	@echo "MY VAR IS ${scriptfiles}"
+	@echo "MY VAR IS ${files_wo_paths}"
+	@echo "MY VAR IS ${basefiles}"
+	@echo "MY_VAR IS ${execfiles}"
+	@echo "MY_VARS IS ${fullexecfiles}"
+
 clean:	
-	ifneq ($(execfiles),)
-		rm -f $(execfiles)
+	ifneq ($(fullexecfiles),)
+		rm -f $(fullexecfiles)
 	endif
 
 install: 
