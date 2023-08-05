@@ -1,0 +1,18 @@
+# solid.service
+#
+# Community Solid Server
+
+[Unit]
+Description=Solid community server
+Documentation=https://github.com/CommunitySolidServer/CommunitySolidServer/
+After=network.target caddy.service
+
+[Service]
+Type=simple
+User=solid
+ExecStart=/opt/solid/manage_solid_server.sh start
+ExecStop=/opt/solid/manage_solid_server.sh stop
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

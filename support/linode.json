@@ -1,0 +1,44 @@
+[
+  {
+    "alerts": {
+      "cpu": 180,
+      "io": 10000,
+      "network_in": 10,
+      "network_out": 10,
+      "transfer_quota": 80
+    },
+    "backups": {
+      "available": false,
+      "enabled": false,
+      "last_successful": null,
+      "schedule": {
+        "day": null,
+        "window": null
+      }
+    },
+    "created": "2023-06-29T14:41:36",
+    "group": "",
+    "host_uuid": "3b2b770ce4f6b51d9857a2e57b8fb8bf3871f741",
+    "hypervisor": "kvm",
+    "id": 47346299,
+    "image": "linode/ubuntu23.04",
+    "ipv4": [
+      "172.105.172.43"
+    ],
+    "ipv6": "2400:8907::f03c:93ff:fea3:7f98/128",
+    "label": "dev.anuco.au",
+    "region": "ap-southeast",
+    "specs": {
+      "disk": 81920,
+      "gpus": 0,
+      "memory": 4096,
+      "transfer": 4000,
+      "vcpus": 2
+    },
+    "status": "provisioning",
+    "tags": [],
+    "type": "g6-standard-2",
+    "updated": "2023-06-29T14:41:36",
+    "watchdog_enabled": true
+  }
+]
