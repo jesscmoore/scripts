@@ -6,6 +6,7 @@
 #
 # Usage:
 # bash add_script.sh [script_name]
+# where [script_name] is the name of the script without the suffix .sh
 
 SCRIPT_FILE=${1}.sh
 COMMAND=${1}
