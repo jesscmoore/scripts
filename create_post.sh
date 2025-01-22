@@ -5,7 +5,7 @@
 # Create a jekyll website blog post markdown file
 # with some template text
 #
-# Usage: bash create_post.sh 20230407-notes.md "Mtg with xyz"
+# Usage: bash create_post.sh install-openhab "How to install OpenHAB"
 
 NAME=`id -F`
 
@@ -19,7 +19,7 @@ TITLE=$2
 # Date for post filename
 NOW_DATE_ONLY=`date "+%Y-%m-%d"`
 
-FILENAME=${NOW_DATE_ONLY}-${FILEPARTNAME}
+FILENAME=${NOW_DATE_ONLY}-${FILEPARTNAME}.md
 
 cat > ${FILENAME} << EOF
 ---
