@@ -26,7 +26,7 @@ cat > ${FILENAME} << EOF
 layout: post
 title:  "${TITLE}"
 date:   ${NOW}
-published: true
+published: false
 toc: true
 ---
 
