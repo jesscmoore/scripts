@@ -11,16 +11,19 @@
 
 PRIVACY=private
 DIR="."
-REPO_NAME=$(basename `pwd`)
-
-# gh repo create ${REPO_NAME} --${PRIVACY} --source=${DIR} --remote=upstream
-echo "Current directory: ${REPO_NAME}"
 
 case "${1}" in
     here)
+
+        REPO_NAME=$(basename `pwd`)
+        echo "Current directory: ${REPO_NAME}"
+
         if gh repo list | awk '{print $1}' | grep ${REPO_NAME}; then
             echo "A repo named ${REPO_NAME} already exists.";
         else
+
+            # TODO: touch README if README.md not found
+
             git init
             gh repo create ${REPO_NAME} --${PRIVACY} \
                                         --source=${DIR} \
