@@ -10,7 +10,7 @@ For ease of use, the `add_script.sh [my_script]` script can be run to make `[my_
 
     $ bash add_script.sh [script_name]
 
-where [script_name] is the name of the script without the suffix .sh.
+where `script_name` is the name of the script without the `.sh` suffix.
 
 This allows scripts to be used as
 
@@ -49,6 +49,12 @@ Create bash script `new_script.sh` with standard bash shebang, timestamp, user's
 Make a jekyll blog post markdown file for a how-to style post with front yaml, title, today's date, summary, procedure, references, and published set to false.
 
     $ create_post ubuntu_w_broadcom_wifi_adaptor "Ubuntu: how to connect to wifi with Broadcom Wireless Adaptor"
+
+This creates jekyll markdown post
+
+    $ _posts/%Y-%M-%d-ubuntu_w_broadcom_wifi_adaptor.md
+
+with title "Ubuntu: how to connect to wifi with Broadcom Wireless Adaptor" and where %Y-%M-%d is today's date. The post will not be published when pushed to master, unless published is changed to `true`.
 
 
 ### Create markdown file for notes
