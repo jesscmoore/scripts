@@ -29,7 +29,7 @@ basefiles := $(basename $(notdir ${scriptfiles}))
 execfiles := $(addprefix ~/bin/,${basefiles})
 fullexecfiles := $(strip $(foreach f,$(execfiles),$(wildcard $(f))))
 
-test: 
+test:
 	@echo "MY FILES ARE ${scriptfiles}"
 	@echo "MY FILES ARE ${basefiles}"
 	@echo "MY FILES ARE ${execfiles}"
@@ -37,22 +37,20 @@ test:
 
 # Remove output ~/bin filenames if exist, if not provide sensible msg
 # This only removes the softlinks to scripts in scripts repo
-clean:	
+clean:
 ifneq (${fullexecfiles},)
 	rm -f $(fullexecfiles)
 endif
 
 # Install scripts from scripts repo in ~/bin
 # $$ req when calling var from within for loop line
-install: 
+install:
 	for file in ../*.sh; do \
 		echo $${file}; \
 		chmod u+x $${file}; \
 		file_wo_path=$$(basename -- "$${file}"); \
 		basefile=$${file_wo_path%%.*}; \
 		currdir="$(shell pwd)"; \
-		ln -s $${currdir}/$${file} ~/bin/$${basefile}; \
+		ln -sf $${currdir}/$${file} ~/bin/$${basefile}; \
 		echo "Added $${basefile} to ~/bin"; \
-	done 
-
-
+	done
