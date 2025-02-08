@@ -1,8 +1,7 @@
 # Add user@host if ssh connection
-if [[ -n $SSH_CONNECTION ]]; then
-PROMPT="%{$fg[white]%}%n@%{$fg[green]%}%m%{$reset_color%} ${PROMPT}"
-else
 PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ ) %{$fg[cyan]%}%c%{$reset_color%}"
+if [[ -n $SSH_CONNECTION ]]; then
+PROMPT="%{$fg[white]%}%n@%{$fg[magenta]%}%m%{$reset_color%} ${PROMPT}"
 fi
 # Append virtual environment
 PROMPT+=' $(virtualenv_prompt_info) $(git_prompt_info) '
