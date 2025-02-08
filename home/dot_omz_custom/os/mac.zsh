@@ -1,0 +1,105 @@
+# Time-stamp: <Tuesday 2025-02-04 21:34:01 Jess Moore>
+#
+# Dev related zsh setup for macos
+
+
+# Set PATH, MANPATH, etc., for Homebrew
+export PATH=/opt/homebrew/sbin:/opt/homebrew/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+# PYTHON
+#eval "$(pyenv init -)"
+#eval "$(pyenv virtualenv-init -)"
+#export PYENV_ROOT="$HOME/.pyenv"
+#export PATH="$PYENV_ROOT/bin:$PATH"
+#alias python="python3.11"
+#alias pip="pip3.11"
+
+# PYTHON SETUP
+# disables prompt mangling in virtual_env/bin/activate
+# export virtual_env_disable_prompt=1
+# https://stackoverflow.com/questions/60212658/issues-with-pyenv-virtualenv-python-and-pip-not-changed-when-activating-deact
+export PATH="$HOME/.pyenv/bin:$PATH"
+
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init --path)"
+  eval "$(pyenv init -)"
+fi
+
+
+# R SETUP
+# R installed at: /opt/homebrew/bin/R
+
+
+# FLUTTER
+export PATH="$PATH:/Users/XXXXXXXX/lib/flutter/bin"
+
+
+# R wattleclir package
+export PATH=$PATH:~/bin
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+
+
+# PODS
+# charlie-breugel@yarrabah.net.au
+xxxxxxxx
+# leslie-smith@yarrabah.net.au
+xxxxxxxx
+xxxxxxxx
+# ipads x 4
+xxxxxxxx
+# GYHSAC
+# xxxxxxxx
+xxxxxxxx
+# RD Web Access (gyhsac.org.au) https://remote.gyhsac.org.au/RDWeb
+
+
+# FAIS app
+xxxxxxxx
+xxxxxxxx
+# API cli
+# export TOKEN=$(curl -s -X POST http://localhost:9090/auth -H 'Content-Type: application/json' -d "{\"username\":\"u1234567\", \"password\":\"XXXXXXXX\"}" | jq -r .access_token)
+# export TOKEN=$(curl -s -X POST https://api.fais.au/auth -H 'Content-Type: application/json' -d "{\"username\":\"u1234567\", \"password\":\"XXXXXXXX\"}" | jq -r .access_token)
+
+
+# Python wattlecli package
+xxxxxxxx
+xxxxxxxx
+
+# Nextcloud
+xxxxxxxx
+xxxxxxxx
+
+# Python
+export PATH=/Library/Frameworks/Python.framework/Versions/3.11/bin:$PATH
+
+# Latex
+eval "$(/usr/libexec/path_helper)"
+
+
+## Ruby & Jekyll
+source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+source /opt/homebrew/opt/chruby/share/chruby/auto.sh
+chruby ruby-3.3.5
+
+# update ruby with
+# brew install ruby
+# brew link --overwrite --force ruby
+# Check with ruby --version, if not latest, do
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+# If ruby --version still doesn't find latest ruby do:
+# gem install bundler
+
+## Radian and R
+# https://github.com/randy3k/radian
+alias r="radian"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+# export PATH="$PATH:$HOME/.rvm/bin"
+
+# Created by `pipx` on 2024-03-07 22:34:37
+export PATH="$PATH:$HOME/.local/bin"
