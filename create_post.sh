@@ -54,9 +54,8 @@ Text
 
 **References**
 
-Refer to ...:
-
-[url]
+- [url1]
+- [url2]
 EOF
 
 echo "Successfully created post ${FILENAME} with template text"
