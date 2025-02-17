@@ -1,6 +1,7 @@
 # Time-stamp: <Tuesday 2025-02-04 21:34:01 Jess Moore>
 #
 # User zsh configuration
+echo "Sourcing ~/.zsh_jmoore"
 
 # Add ~/bin to $PATH.
 export PATH=$HOME/bin:$PATH
