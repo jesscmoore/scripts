@@ -94,7 +94,7 @@ ROBBYRUSSELL_RIGHT_PROMPT_ELEMENTS=(status virtualenv)
 export VIRTUALENV_DISABLE_PROMPT=
 
 
-# Personal settings - macos only
+# Personal settings - macos specific
 if [[ $(uname) == "Darwin" ]]; then
     source "$ZSH_CUSTOM"/os/mac.zsh
 fi
