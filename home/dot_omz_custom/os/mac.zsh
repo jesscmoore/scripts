@@ -1,7 +1,7 @@
 # Time-stamp: <Tuesday 2025-02-04 21:34:01 Jess Moore>
 #
 # Dev related zsh setup for macos
-
+echo "Sourcing \$ZSH_CUSTOM/os/mac.zsh"
 
 # Set PATH, MANPATH, etc., for Homebrew
 export PATH=/opt/homebrew/sbin:/opt/homebrew/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin
@@ -82,17 +82,15 @@ eval "$(/usr/libexec/path_helper)"
 
 
 ## Ruby & Jekyll
+# Ref: https://jekyllrb.com/docs/installation/macos/
+# Specifies MacOS Ruby & Jekyll install method incl. # latest stable ruby supported by Jekyll
 source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
 source /opt/homebrew/opt/chruby/share/chruby/auto.sh
-chruby ruby-3.3.5
+chruby ruby-3.4.1
+# Update ruby with `ruby-install` not `brew`
+# ruby-install ruby [version_no]
+# where version_no is latest ruby supported by Jekyll
 
-# update ruby with
-# brew install ruby
-# brew link --overwrite --force ruby
-# Check with ruby --version, if not latest, do
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-# If ruby --version still doesn't find latest ruby do:
-# gem install bundler
 
 ## Radian and R
 # https://github.com/randy3k/radian
