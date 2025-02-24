@@ -42,8 +42,9 @@ ifneq (${fullexecfiles},)
 	rm -f $(fullexecfiles)
 endif
 
-# Install scripts from scripts repo in ~/bin
+# Install scripts from scripts repo into ~/bin/.
 # $$ req when calling var from within for loop line
+# Install quotes.json into ~/Documents/.
 install:
 	for file in ../*.sh; do \
 		echo $${file}; \
@@ -54,3 +55,4 @@ install:
 		ln -sf $${currdir}/$${file} ~/bin/$${basefile}; \
 		echo "Added $${basefile} to ~/bin"; \
 	done
+	ln -sf `pwd`/quotes.json ~/quotes.json
