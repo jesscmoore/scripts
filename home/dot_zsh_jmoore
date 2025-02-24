@@ -2,6 +2,7 @@
 #
 # User zsh configuration
 echo "Sourcing ~/.zsh_jmoore"
+cd Documents
 
 # Add ~/bin to $PATH.
 export PATH=$HOME/bin:$PATH
@@ -20,3 +21,9 @@ fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
+
+
+# Runs cow_quote to render fortune/my quote as cowsay or cowthink
+# Source: fortune or ~/quotes.json
+# Requires: scripts/cow_quote.sh installed in ~/bin
+cow_quote
