@@ -3,5 +3,6 @@
 support/*.json
 support/*.sec
 support/*env.txt
+support/tmp/*
 
 .vscode/*
