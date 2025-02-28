@@ -43,7 +43,7 @@ Short 1-2 sentence introduction.
 
 Text.
 
-See [other post]({% post_url 2025-02-14-other-post %}) for how to do xyz.
+See [other post]({% post_url 2021-03-02-how-to-setup-jekyll %}) for how to do xyz.
 
 [command block]
 
