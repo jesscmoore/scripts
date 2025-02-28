@@ -30,7 +30,7 @@ published: false
 toc: true
 ---
 
-Short 1-2 sentence introduction
+Short 1-2 sentence introduction.
 
 **Summary**
 
@@ -41,14 +41,16 @@ Short 1-2 sentence introduction
 
 ### Sub heading 1
 
-Text
+Text.
+
+See [other post]({% post_url 2025-02-14-other-post %}) for how to do xyz.
 
 [command block]
 
 
 ### Sub heading 2
 
-Text
+Text.
 
 [command block]
 
@@ -58,4 +60,4 @@ Text
 - [url2]
 EOF
 
-echo "Successfully created post ${FILENAME} with template text"
+echo "Successfully created post ${FILENAME} with template text."
