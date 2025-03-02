@@ -2,7 +2,7 @@
 #
 # User zsh configuration
 echo "Sourcing ~/.zsh_jmoore"
-cd Documents
+cd ~/Documents
 
 # Add ~/bin to $PATH.
 export PATH=$HOME/bin:$PATH
