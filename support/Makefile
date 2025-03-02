@@ -44,7 +44,7 @@ endif
 
 # Install scripts from scripts repo into ~/bin/.
 # $$ req when calling var from within for loop line
-# Install quotes.json into ~/Documents/.
+# Install quotes.json into ~/.
 install:
 	for file in ../*.sh; do \
 		echo $${file}; \
