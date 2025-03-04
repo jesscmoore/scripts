@@ -30,6 +30,10 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
+# POETRY SETUP
+# Configure poetry to save environment in project folder
+poetry config virtualenvs.in-project true
+
 
 # R SETUP
 # R installed at: /opt/homebrew/bin/R
