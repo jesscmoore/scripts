@@ -6,13 +6,17 @@
 #
 # Usage: bash create_gitignore.sh
 
-case "${$1}" in
+case "${1}" in
     flutter)
 
-        echo "Creating .gitignore for: ${TYPE} package type"
+        echo "Creating .gitignore for: ${TYPE} project.";;
+
+    python)
+
+        echo "Creating .gitignore for: ${TYPE} project.";;
 
     *)
-        echo "Supported options: flutter";
+        echo "Supported options: flutter, python.";
         exit;;
 esac;
 
@@ -23,7 +27,6 @@ TYPE=$1
 ########################################################################
 if [ "${TYPE}" = "flutter" ]; then
 ########################################################################
-
 
 cat > .gitignore << EOF
 # Privacy & Security
@@ -74,6 +77,48 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+EOF
+########################################################################
+fi
+
+########################################################################
+if [ "${TYPE}" = "python" ]; then
+########################################################################
+
+cat > .gitignore << EOF
+# Privacy & Security
+*.env
+
+# Data
+data/
+
+# Miscellaneous
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# API related
+**/doc/api/
+
 EOF
 ########################################################################
 fi
