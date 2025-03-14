@@ -92,6 +92,9 @@ cat > .gitignore << EOF
 # Data
 data/
 
+# Environment
+.venv/
+
 # Miscellaneous
 *.log
 *.pyc
