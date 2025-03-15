@@ -39,3 +39,6 @@ alias cnotes="cd ~/Documents/private/notes"
 alias comz="cd ~/.oh-my-zsh"
 alias cposts="cd ~/Documents/jesscmoore.github.io/_posts"
 alias cpriv='cd ~/Documents/private'
+
+# Tmp
+alias gotmp='mkdir -p tmp; cd tmp'
