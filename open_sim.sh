@@ -4,7 +4,7 @@
 #
 # Opening mobile development simulator.
 #
-# Usage: bash create_gitignore.sh
+# Usage: bash open_sim.sh
 
 # Package type
 case "${1}" in
