@@ -6,25 +6,46 @@
 #
 # Usage: bash open_sim.sh
 
-# Package type
-case "${1}" in
-    ios|android)
+# Platform device type and name
+IPAD_SIM=A9726D34-87EE-4371-88BE-1CE198E12C4C
+PIX3A_SIM=Pixel_3a_Simulator
 
-        echo "Opening ${1} ipad simulator.";;
+case "${1}" in
+    ios)
+
+        if [[ -z $2 ]]; then
+            DEV_ID=${IPAD_SIM}
+            echo "Opening ${1} ipad simulator.";
+        else
+            DEV_ID=$2
+            echo "Opening ${1} ${2} simulator.";
+        fi;;
+
+    android)
+
+        if [[ -z $2 ]]; then
+            DEV_ID=${PIX3A_SIM}
+            echo "Opening ${1} Pixel3A simulator.";
+        else
+            DEV_ID=$2
+            echo "Opening ${1} ${2} simulator.";
+        fi;;
+
 
     *)
-        echo "Supported options: ios, android.";
+        echo "Supported options";
+        echo "\$1: ios, android.";
+        echo "\$2: provide device id (Defaults ios: ipad id, android: pixel3a id).";
         exit;;
 esac;
 
 TYPE=$1
 
-IPAD_SIM=A9726D34-87EE-4371-88BE-1CE198E12C4C
 
 ########################################################################
 if [ "${TYPE}" = "ios" ]; then
 ########################################################################
-open -a Simulator --args -CurrentDeviceUDID ${IPAD_SIM}
+open -a Simulator --args -CurrentDeviceUDID ${DEV_ID}
 ########################################################################
 fi
 
