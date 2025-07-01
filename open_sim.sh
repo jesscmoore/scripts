@@ -10,7 +10,7 @@
 case "${1}" in
     ios|android)
 
-        echo "Opening ${1} simulator.";;
+        echo "Opening ${1} ipad simulator.";;
 
     *)
         echo "Supported options: ios, android.";
@@ -19,10 +19,12 @@ esac;
 
 TYPE=$1
 
+IPAD_SIM=A9726D34-87EE-4371-88BE-1CE198E12C4C
+
 ########################################################################
 if [ "${TYPE}" = "ios" ]; then
 ########################################################################
-open -a Simulator
+open -a Simulator --args -CurrentDeviceUDID ${IPAD_SIM}
 ########################################################################
 fi
 
