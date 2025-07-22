@@ -1,2 +1,0 @@
-LIN_ACCT=its
-ITS_USER=dc

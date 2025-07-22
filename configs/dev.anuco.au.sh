@@ -1,1 +1,0 @@
-LIN_ACCT=jmanutce
