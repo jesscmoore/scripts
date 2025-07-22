@@ -59,5 +59,12 @@ with title "Ubuntu: how to connect to wifi with Broadcom Wireless Adaptor" and w
 
 ### Create markdown file for notes
 
+Create a markdown file for note taking with standard header stub comprising title, date.
 
-### Create makefile
+    $ create_md [filename.md] ["Notes"]
+
+### Create meeting notes file
+
+Create a markdown file for taking meeting notes. This has a header comprising title, date, attendees, place. Where known attendees are provided as a comma separated string.
+
+    # create_mtg [filename.md] ["Meeting with XYZ"] ["Jane, Cam, Liz, Sam"]

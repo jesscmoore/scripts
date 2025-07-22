@@ -4,7 +4,7 @@
 #
 # Creates a markdown file
 #
-# Usage: bash create_md.sh 20230407-notes.md "Mtg with xyz"
+# Usage: bash create_md.sh 20230407-notes.md "Project K"
 
 NAME=`id -F`
 NOW=`date "+%A %Y-%m-%d %H:%M:%S"`
