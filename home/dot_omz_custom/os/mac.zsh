@@ -48,36 +48,6 @@ export PATH=$PATH:~/bin
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
 
-# PODS
-# charlie-breugel@yarrabah.net.au
-xxxxxxxx
-# leslie-smith@yarrabah.net.au
-xxxxxxxx
-xxxxxxxx
-# ipads x 4
-xxxxxxxx
-# GYHSAC
-# xxxxxxxx
-xxxxxxxx
-# RD Web Access (gyhsac.org.au) https://remote.gyhsac.org.au/RDWeb
-
-
-# FAIS app
-xxxxxxxx
-xxxxxxxx
-# API cli
-# export TOKEN=$(curl -s -X POST http://localhost:9090/auth -H 'Content-Type: application/json' -d "{\"username\":\"u1234567\", \"password\":\"XXXXXXXX\"}" | jq -r .access_token)
-# export TOKEN=$(curl -s -X POST https://api.fais.au/auth -H 'Content-Type: application/json' -d "{\"username\":\"u1234567\", \"password\":\"XXXXXXXX\"}" | jq -r .access_token)
-
-
-# Python wattlecli package
-xxxxxxxx
-xxxxxxxx
-
-# Nextcloud
-xxxxxxxx
-xxxxxxxx
-
 # Python
 export PATH=/Library/Frameworks/Python.framework/Versions/3.11/bin:$PATH
 

@@ -29,6 +29,7 @@ instead of
 
 Alternatively, to install all scripts to `$USER/bin` use:
 
+    $ cd support
     $ make install
 
 

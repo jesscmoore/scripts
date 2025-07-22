@@ -24,24 +24,17 @@ fi
 if [ -n "$1" ]; then
     HOST_NAME="$1"
     HOST_IP=$(dig +short ${HOST_NAME})
-    if [ $(echo ${HOST_NAME} |awk -F "." -v OFS="." '{$1=""; print $0}') = '.cecs.anu.edu.au' ]; then
-        ITS_SERVER=${HOST_NAME}
-    fi
 fi
 
-# This framework currently (2022-11-01) assumes the target cloud
-# platform is Linode, though the only dependency is probably the
-# provision_linode.sh script. The specific Linode account to be used
+# Currently assumes using linode server. The specific Linode account to be used
 # is specified as LIN_ACCT, which is specifically set in the host name
 # specific shell script in configs.
 
 LIN_ACCT=linode_account_name_should_be_specified_in_host_specific_configs_script
 
-# Typical installations create a reverse proxy for a sub domain. For
-# solid servers this is 'solid' and for fais this is an 'api' server.
+# Typical installations create a reverse proxy for a sub domain.
 # The host name specific shell script in configs can update this
 # value. The SUBDOMAIN should be set depending on the LIN_ACCOUNT
-# (gjwanupods = solid; gjwanufais = api; gjwanupd = nextcloud) but
 # currently comes from the file in the config directory.
 
 SUBDOMAIN=none
@@ -97,11 +90,6 @@ else
     exit 1
 fi
 
-
-# FOR FAIS & CAS ONLY:
-
-ENV=support/${LIN_ACCT}_env.txt
-ENV_DIR=support/${LIN_ACCT}_environment
 
 
 # Support functions
@@ -161,8 +149,8 @@ testURL () {
 	RESPONSE="$3"
     else
 	RESPONSE="$(${CURL} ${URL})"
-    fi 
-	
+    fi
+
     if echo ${RESPONSE} | egrep "${PAT}" >/dev/null; then
 	printf "PASS: ${URL} returned the expected response.\n"
 	result=0
@@ -200,4 +188,3 @@ fi
 # file. LIN_ACCT will be specified in the CONFIGS file.
 
 USERS=support/${LIN_ACCT}_users.json
-
