@@ -194,4 +194,4 @@ _poetry_e56c27cb8c68f4d2_complete()
 }
 
 _poetry_e56c27cb8c68f4d2_complete "$@"
-compdef _poetry_e56c27cb8c68f4d2_complete /Users/XXXXXXXX/Library/Application Support/pipx/venvs/poetry/bin/poetry
+compdef _poetry_e56c27cb8c68f4d2_complete /Users/u9904893/Library/Application Support/pipx/venvs/poetry/bin/poetry
