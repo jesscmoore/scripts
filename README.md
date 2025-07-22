@@ -1,6 +1,13 @@
 # Scripts
 
-Utility scripts for common tasks.
+**Utility scripts for everyday tasks used in an open source working environment.**
+
+*Time-stamp: <Friday 2025-07-18 10:54:11 +1000 Jess Moore>*
+
+*Authors: Jess Moore*
+
+*License: GNU GPL V3*
+
 
 ## Install
 
@@ -20,6 +27,9 @@ instead of
 
     $ bash script_name.sh $ARG
 
+Alternatively, to install all scripts to `$USER/bin` use:
+
+    $ make install
 
 
 ## Examples
@@ -68,3 +78,9 @@ Create a markdown file for note taking with standard header stub comprising titl
 Create a markdown file for taking meeting notes. This has a header comprising title, date, attendees, place. Where known attendees are provided as a comma separated string.
 
     # create_mtg [filename.md] ["Meeting with XYZ"] ["Jane, Cam, Liz, Sam"]
+
+## Create makefile
+
+Create a generic makefile for recording make rules.
+
+    $ create_mk
