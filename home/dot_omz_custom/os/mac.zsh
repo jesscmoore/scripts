@@ -40,7 +40,7 @@ poetry config virtualenvs.in-project true
 
 
 # FLUTTER
-export PATH="$PATH:/Users/u9904893/lib/flutter/bin"
+export PATH="$PATH:$HOME/lib/flutter/bin"
 
 
 # R wattleclir package
