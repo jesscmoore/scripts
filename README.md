@@ -8,6 +8,7 @@
 
 *License: GNU GPL V3*
 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://raw.githubusercontent.com/jesscmoore/scripts/main/LICENSE)
 [![GitHub License](https://img.shields.io/github/license/jesscmoore/scripts)](https://raw.githubusercontent.com/jesscmoore/scripts/main/LICENSE)
 [![Last Updated](https://img.shields.io/github/last-commit/jesscmoore/scripts?label=last%20updated)](https://github.com/jesscmoore/scripts/commits/main/)
 [![GitHub commit activity (dev)](https://img.shields.io/github/commit-activity/w/jesscmoore/scripts/main)](https://github.com/gjwgit/rattle/commits/main/)
