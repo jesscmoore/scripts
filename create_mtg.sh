@@ -15,7 +15,19 @@ PLACE=$4
 
 cat > ${FILENAME} << EOF
 # ${TITLE}
+
+<!-- markdownlint-disable-file MD036 -->
+
 *Date: ${NOW} ${NAME}*
+
 *Attendees: ${ATTENDEES}*
+
 *Location: ${PLACE}*
+
+## Actions
+
+- Foo
+- Foo2
+
+## Discussions
 EOF
