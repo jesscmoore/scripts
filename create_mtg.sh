@@ -29,5 +29,12 @@ cat > "${FILENAME}" << EOF
 - Foo
 - Foo2
 
+## Talking Points
+
+1.
+2.
+3.
+4. Next actions/mtg
+
 ## Discussions
 EOF
