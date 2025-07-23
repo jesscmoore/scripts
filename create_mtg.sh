@@ -6,14 +6,14 @@
 #
 # Usage: bash create_mtg.sh 20230407-notes.md "Mtg with xyz" "Jane, Bob, Liz, Sam" "ANU"
 
-NAME=`id -F`
-NOW=`date "+%A %Y-%m-%d %H:%M:%S"`
+NAME=$(id -F)
+NOW=$(date "+%A %Y-%m-%d %H:%M:%S")
 FILENAME=$1
 TITLE=$2
 ATTENDEES=$3
 PLACE=$4
 
-cat > ${FILENAME} << EOF
+cat > "${FILENAME}" << EOF
 # ${TITLE}
 
 <!-- markdownlint-disable-file MD036 -->
