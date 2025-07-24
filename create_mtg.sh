@@ -16,8 +16,6 @@ PLACE=$4
 cat > "${FILENAME}" << EOF
 # ${TITLE}
 
-<!-- markdownlint-disable-file MD036 -->
-
 *Date: ${NOW} ${NAME}*
 
 *Attendees: ${ATTENDEES}*
@@ -37,4 +35,10 @@ cat > "${FILENAME}" << EOF
 4. Next actions/mtg
 
 ## Discussions
+
+
+
+
+
+<!-- markdownlint-disable-file MD036 -->
 EOF
