@@ -9,7 +9,7 @@
 # TODO: quotes.json should be installed elsewhere, e.g. with Documents/scripts/home and softlink to Documents for ready editing
 QUOTE_FILE=~/quotes.json
 
-OS=`uname`
+OS=$(uname)
 case "${OS}" in
 'Linux')
     COWS_DIR="/opt/homebrew/share/cowsay/cows";
