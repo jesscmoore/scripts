@@ -29,7 +29,6 @@ fi
 
 PAPERNAME=$1
 BIB=$2
-BIBXML="$BIB".xml
 
 # Check paper exists
 if [ ! -f "$PAPERNAME" ]; then
@@ -43,17 +42,59 @@ if [ ! -f "$BIB" ]; then
   exit 1
 fi
 
-# Convert ris citation file to xml format
-ris2xml "$BIB" > "$BIBXML"
+# Check bib file format and convert if necessary
+EXT="${BIB##*.}"
+BASENAME=$(basename "$BIB")
+
+case "${EXT}" in
+'xml')
+    BIBXML=$BIB;;
+'ris'|'nbib')
+    echo "Converting ${BIB} to .xml format."
+    BIBXML="${BASENAME}.xml";
+
+    case "${EXT}" in
+
+        'ris')
+            ris2xml "$BIB" > "$BIBXML";;
+        'nbib')
+            nbib2xml "$BIB" > "$BIBXML";;
+    esac;;
+*)
+    echo "Error ${BIB} is not in a supported file format.";
+    Exit 1;;
+esac
+
 
 # Extract first author from xml
 AUTHORS=$(xml sel -N x="http://www.loc.gov/mods/v3" -t -v "//x:mods[@ID]/x:name[@type='personal']/x:namePart[@type='family']" "$BIBXML")
+
+echo "Authors: ${AUTHORS}"
+
+if [[ -z $AUTHORS ]]; then
+    echo "Error: Author names were not parsed from ${BIB}."
+    exit 1
+fi
 
 AUTHOR1=$(echo "$AUTHORS" | head -n 1)
 N_AUTHORS=$(echo "$AUTHORS" | wc -l)
 
 # Extract publication year from xml
 DATE_RANGE=$(xml sel -N x="http://www.loc.gov/mods/v3" -t -v "//x:mods[@ID]/x:part/x:date" "${BIBXML}")
+
+# Try alternate parametr if <date> not found
+if [[ -z $DATE_RANGE ]]; then
+
+    DATE_RANGE=$(xml sel -N x="http://www.loc.gov/mods/v3" -t -v "//x:mods[@ID]/x:originInfo/x:dateIssued" "${BIBXML}")
+
+fi
+
+# Exit if not found
+if [[ -z $DATE_RANGE ]]; then
+    echo "Error: Date was not parsed from ${BIB}."
+    exit 1
+fi
+
 # A date is typically formatted as
 # yyyymmdd = 8 characters or
 # yyyy-mm-dd = 10 characters or
@@ -63,35 +104,31 @@ if [[ ${#DATE_RANGE} -gt 10 ]]; then
   # Date range provided
   echo "${DATE_RANGE}: ${#DATE_RANGE}"
   YEAR=$(echo "$DATE_RANGE" | cut -d '-' -f 2 | cut -c1-4)
-  echo "$YEAR"
 else
   # Single date provided
   echo "${DATE_RANGE}: ${#DATE_RANGE}"
   YEAR=$(echo "$DATE_RANGE" | cut -c1-4)
-  echo "$YEAR"
 fi
 
 
 # Form new paper name
 if [ "$N_AUTHORS" -eq "1" ]; then
 
+    # 1 author
     AUTHOR_STR=$AUTHOR1
 
 elif [ "$N_AUTHORS" -eq "2" ]; then
 
+    # 2 authors
     AUTHOR2=$(echo "$AUTHORS" |head -n 2 | tr '\n' '_')
     AUTHOR_STR="${AUTHOR1}_${AUTHOR2}"
 
-elif [ "$N_AUTHORS" -gt "2" ]; then
-
+else
+    # More than 2 authors
     AUTHOR_STR="${AUTHOR1}_etal"
 
-else
-
-    echo "Error: Author names were not parsed from ${BIB}."
-    exit 1
-
 fi
+
 NEWPAPERNAME="${YEAR}_${AUTHOR_STR}.pdf"
 
 echo "Old paper name: ${PAPERNAME}"
