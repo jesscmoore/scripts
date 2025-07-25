@@ -23,7 +23,7 @@ function usage() {
     exit 1 # Exit with a non-zero status to indicate an error
 }
 
-if [[ $# -eq 0 ]]; then
+if [[ $# -eq 0 || $* == *"help"* || $* == *"-h"* ]]; then
     usage
 fi
 
@@ -42,4 +42,20 @@ cat > "${FILENAME}" << EOF
 # ${DESC}
 #
 # Usage: ${FILENAME} [args...]
+
+function usage() {
+    echo "Usage: ${FILENAME} [args...]"
+    echo ""
+    echo "Description: ${DESC}."
+    echo ""
+    echo "Arguments:"
+    echo "  arg1:      ..."
+    echo "  arg2:      ..."
+    echo ""
+    exit 1 # Exit with a non-zero status to indicate an error
+}
+
+if [[ \$# -eq 0 || \$* == *"help"* || \$* == *"-h"* ]]; then
+    usage
+fi
 EOF
