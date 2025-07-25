@@ -7,7 +7,7 @@
 # Usage: bash rename_paper.sh "file" "bibfile"
 
 function usage() {
-    echo "Usage: $(basename "$0") 'file' 'bibfile"
+    echo "Usage: $(basename "$0") 'file' 'bibfile'"
     echo ""
     echo "Description: This script renames a research paper "
     echo "             to a standardised filename of "
@@ -47,14 +47,30 @@ fi
 ris2xml "$BIB" > "$BIBXML"
 
 # Extract first author from xml
-AUTHORS=$(xml sel -N x="http://www.loc.gov/mods/v3" -t -v "//x:mods[@ID='ref1']/x:name[@type='personal']/x:namePart[@type='family']" "$BIBXML")
+AUTHORS=$(xml sel -N x="http://www.loc.gov/mods/v3" -t -v "//x:mods[@ID]/x:name[@type='personal']/x:namePart[@type='family']" "$BIBXML")
 
 AUTHOR1=$(echo "$AUTHORS" | head -n 1)
 N_AUTHORS=$(echo "$AUTHORS" | wc -l)
 
 # Extract publication year from xml
-DATE_RANGE=$(xml sel -N x="http://www.loc.gov/mods/v3" -t -v "//x:mods[@ID='ref1']/x:part/x:date" "${BIBXML}")
-YEAR=$(echo "$DATE_RANGE" | cut -d '-' -f 2 | cut -c1-4)
+DATE_RANGE=$(xml sel -N x="http://www.loc.gov/mods/v3" -t -v "//x:mods[@ID]/x:part/x:date" "${BIBXML}")
+# A date is typically formatted as
+# yyyymmdd = 8 characters or
+# yyyy-mm-dd = 10 characters or
+# XXXXXXXX-yy/mm/dd > 10 characters
+# Use length to determine year extraction
+if [[ ${#DATE_RANGE} -gt 10 ]]; then
+  # Date range provided
+  echo "${DATE_RANGE}: ${#DATE_RANGE}"
+  YEAR=$(echo "$DATE_RANGE" | cut -d '-' -f 2 | cut -c1-4)
+  echo "$YEAR"
+else
+  # Single date provided
+  echo "${DATE_RANGE}: ${#DATE_RANGE}"
+  YEAR=$(echo "$DATE_RANGE" | cut -c1-4)
+  echo "$YEAR"
+fi
+
 
 # Form new paper name
 if [ "$N_AUTHORS" -eq "1" ]; then
