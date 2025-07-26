@@ -55,7 +55,7 @@ Create a private github repo. Currently, assumes user has created and navigated 
 
 Create bash script `new_script.sh` with standard bash shebang, timestamp, user's name, provided description.
 
-    `create_bash new_script.sh "Very brief description \n optional line 2"` -
+    create_bash new_script "Very brief description \n optional line 2"
 
 ### Create Jekyll blog post
 
@@ -79,10 +79,12 @@ Create a markdown file for note taking with standard header stub comprising titl
 
 Create a markdown file for taking meeting notes. This has a header comprising title, date, attendees, place. Where known attendees are provided as a comma separated string.
 
-    # create_mtg [filename.md] ["Meeting with XYZ"] ["Jane, Cam, Liz, Sam"]
+    # create_mtg ["Meeting with XYZ"] ["Jane, Cam, Liz, Sam"]
 
 ## Create makefile
 
 Create a generic makefile for recording make rules.
 
     create_mk
+
+<!-- markdownlint-disable-file MD036 -->
