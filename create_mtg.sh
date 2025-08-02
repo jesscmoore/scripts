@@ -55,12 +55,18 @@ cat > "${FILENAME}" << EOF
 - Foo
 - Foo2
 
-## Talking Points
+## Agenda
 
 1.
 2.
 3.
 4. Next actions/mtg
+
+## Talking Points
+
+1.
+2.
+3.
 
 ## Discussion
 
