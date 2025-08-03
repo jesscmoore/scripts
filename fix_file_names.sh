@@ -20,12 +20,21 @@ if [[ -n "$1"  &&  -e "$1" ]]; then
     if [[ -n $f ]]; then
         # Replace " " with "_"
         g="${f// /_}"
-        mv "$f" "$g"
-        echo "replaced ' ' with '_'"
+        if [ "$f" != "$g" ]; then
+            mv "$f" "$g"
+            echo "Replaced ' ' with '_'"
+        else
+            echo "No spaces found in filename."
+        fi
 
         # Replace " - " with "-"
-        i=$(echo "$g" | tr '_-_' '-' | tr -s '-')
-        mv "$g" "$i"
+        i="${g//_-_/-}"
+        if [ "$g" != "$i" ]; then
+            mv "$g" "$i"
+            echo "Replaced ' - ' with '-'"
+        else
+            echo "No hyphens in spaces found in filename."
+        fi
     fi
 
 else
