@@ -8,7 +8,7 @@
 # - replaces " - " with "-"
 
 function usage() {
-    echo "Usage: $0 [file]"
+    echo "Usage: $0 [-d] [file]"
     echo ""
     echo "Description: Converts Windows style filenames with spaces to "
     echo "linux style whitespace free filenames, either for all files in "
@@ -17,6 +17,9 @@ function usage() {
     echo "Arguments:"
     echo "  file: Name of file to fix the filename of. (No default)."
     echo ""
+    echo "Flags:"
+    echo "  -d:   Prepend file with last modified date. (No default)."
+    echo ""
     exit 1 # Exit with a non-zero status to indicate an error
 }
 
@@ -24,17 +27,26 @@ if [[ $* == *"help"* || $* == *"-h"* ]]; then
     usage
 fi
 
+# By default, is_shell is false
+show_date=false
+
+# Parse arguments and flags
+while getopts :hd opt; do
+    case $opt in
+        h) usage;;
+        d) show_date=true;;
+        :) echo "Missing argument for option -$OPTARG"; exit 1;;
+       \?) echo "Unknown option -$OPTARG"; exit 1;;
+    esac
+done
+
+# Shift positional parameters to remove processed options
+shift $(( OPTIND - 1 ))
+
 
 # Filename supplied
 if [[ -n "$1"  &&  -e "$1" ]]; then
     f="$1"
-
-    # Get file type
-    EXT="${f##*.}"
-
-    # Get file extension
-    BASENAME=${f%.*}
-    PREF=${BASENAME:0:3}
 
     if [[ -n $f ]]; then
         # Replace " " with "_"
@@ -55,9 +67,18 @@ if [[ -n "$1"  &&  -e "$1" ]]; then
             echo "No hyphens in spaces found in filename."
         fi
 
+        # Prepend with last modified date
+        if $show_date; then
+            DATE_SUMM=$(stat -f %Sm -t %Y%m%d "$i")
+            j="${DATE_SUMM}-$i"
+            mv "$i" "$j"
+            echo "Prepending file with today's date."
+            i=$j
+        fi
+
         # Print recently changed matching files
         # shellcheck disable=SC2012
-        ls -lt ./"$PREF*.$EXT" | head -n 5
+        ls -l "$i"
     fi
 
 else
