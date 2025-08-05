@@ -23,7 +23,7 @@ function usage() {
     exit 1 # Exit with a non-zero status to indicate an error
 }
 
-if [[ $# -eq 0 ]]; then
+if [[ $# -eq 0 || $* == *"help"* || $* == *"-h"* ]]; then
     usage
 fi
 
