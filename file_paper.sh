@@ -7,6 +7,11 @@
 #
 # Usage: bash file_paper.sh "file" "research_field"
 
+declare -a FIELDS
+declare -a FOLDERS
+FIELDS=('biod' 'kgraph' 'web' 'solid' 'dis')
+FOLDERS=('biodiversity' 'know_graphs' 'semantic_web' 'solid' 'disaster')
+
 function usage() {
     echo "Usage: $(basename "$0") 'file' 'research_field"
     echo ""
@@ -15,7 +20,8 @@ function usage() {
     echo ""
     echo "Arguments:"
     echo "  file:             Academic paper filename."
-    echo "  research_field:   Research category."
+    printf -v joined_fields '%s, ' "${FIELDS[@]}"
+    echo "  research_field:   Research field category (${joined_fields})"
     echo ""
     exit 1 # Exit with a non-zero status to indicate an error
 }
@@ -36,26 +42,29 @@ fi
 
 # Check valid field name
 case "${FIELD}" in
-'biod')
-    FOLDER='biodiversity';;
-'kgraph')
-    FOLDER='know_graphs';;
-'web')
-    FOLDER='semantic_web';;
-'solid')
-    FOLDER=$FIELD;;
+"${FIELDS[0]}")
+    FOLDER="${FOLDERS[0]}";;
+"${FIELDS[1]}")
+    FOLDER="${FOLDERS[1]}";;
+"${FIELDS[2]}")
+    FOLDER="${FOLDERS[2]}";;
+"${FIELDS[3]}")
+    FOLDER="${FOLDERS[3]}";;
+"${FIELDS[4]}")
+    FOLDER="${FOLDERS[4]}";;
 *)
     echo "Error: Research field not in field list: ";
     exit 1;;
 esac
 
 DIR="${HOME}/Documents/research/${FOLDER}/papers"
+mkdir -p "${DIR}"
 
 # Check destination folder exists
-if [ ! -d "$DIR" ]; then
-  echo "Error: Destination folder ${DIR} does not exist."
-  exit 1
-fi
+# if [ ! -d "$DIR" ]; then
+#   echo "Error: Destination folder ${DIR} does not exist."
+#   exit 1
+# fi
 
 # Move file
 NEW_FILE="${DIR}/${FILE}"
