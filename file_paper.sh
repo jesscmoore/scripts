@@ -40,33 +40,19 @@ if [ ! -f "$FILE" ]; then
   exit 1
 fi
 
-# Check valid field name
-case "${FIELD}" in
-"${FIELDS[0]}")
-    FOLDER="${FOLDERS[0]}";;
-"${FIELDS[1]}")
-    FOLDER="${FOLDERS[1]}";;
-"${FIELDS[2]}")
-    FOLDER="${FOLDERS[2]}";;
-"${FIELDS[3]}")
-    FOLDER="${FOLDERS[3]}";;
-"${FIELDS[4]}")
-    FOLDER="${FOLDERS[4]}";;
-"${FIELDS[5]}")
-    FOLDER="${FOLDERS[5]}";;
-*)
-    echo "Error: Research field not in field list: ";
-    exit 1;;
-esac
+for i in $(seq 1 ${#FIELDS[@]});
+do
+    if [ "${FIELDS[i]}" == "${FIELD}" ]; then
+        FOLDER="${FOLDERS[i]}";
+        break;
+    elif [[ $i -eq "${#FIELDS[@]}-1" ]]; then
+        echo "Error: Research field not in field list.";
+        exit 1;
+    fi
+done
 
 DIR="${HOME}/Documents/research/${FOLDER}/papers"
 mkdir -p "${DIR}"
-
-# Check destination folder exists
-# if [ ! -d "$DIR" ]; then
-#   echo "Error: Destination folder ${DIR} does not exist."
-#   exit 1
-# fi
 
 # Move file
 NEW_FILE="${DIR}/${FILE}"
