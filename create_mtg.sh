@@ -34,12 +34,53 @@ ATTENDEES=$2
 PLACE=$3
 
 ## Form filename with syntax YYmmdd-person1_person2_author.md
-# Convert attendees to lc, replace ", " with "_"
-PEOPLE_SUMM=$(echo "$ATTENDEES" | awk '{print tolower($0);}' | sed 's/,/ /g;s/  / /g;s/ /_/g')
+# Convert attendees to lc, replace ' ' with '_'
+PEOPLE_SUMM=$(echo "$ATTENDEES" | awk '{print tolower($0);}' | sed 's/ /_/g')
+
+# Read into array
+delimiter=","
+# Store the original IFS to restore it later
+OIFS=$IFS
+
+# Set IFS to the desired delimiter
+IFS="$delimiter"
+read -ra PEOPLE <<< "$PEOPLE_SUMM"
+# Restore original delimiter
+IFS=$OIFS
+
+# replace ", " with "_"
+# PEOPLE_SUMM=$(echo "$PEOPLE_SUMM" | sed 's/,/ /g;s/  / /g;s/ /_/g')
+
+
+# PERSON1=${PEOPLE[0]}
+# echo "Person 1: ${PERSON1}"
+N_PEOPLE=${#PEOPLE[@]}
+echo "people array num: ${N_PEOPLE}"
+
+
+# Form new paper name
+if [ "$N_PEOPLE" -eq "1" ]; then
+
+    # 1 author
+    PEOPLE_STR=${PEOPLE[0]}
+
+elif [ "$N_PEOPLE" -eq "2" ]; then
+
+    # 2 authors
+    PEOPLE_STR="${PEOPLE[0]}_${PEOPLE[1]}"
+
+else
+    # More than 2 authors
+    PEOPLE_STR="${PEOPLE[0]}_etal"
+
+fi
+
 # Get lowercase firstname of author
 AUTHOR_SUMM=$(echo "$AUTHOR" | awk '{print tolower($1);}')
 DATE_SUMM=$(date "+%Y%m%d")
-FILENAME="${DATE_SUMM}-${PEOPLE_SUMM}_${AUTHOR_SUMM}.md"
+# Form filename
+FILENAME="${DATE_SUMM}-${PEOPLE_STR}_${AUTHOR_SUMM}.md"
+
 
 cat > "${FILENAME}" << EOF
 # ${TITLE}
