@@ -99,8 +99,13 @@ fi
 # yyyymmdd = 8 characters or
 # yyyy-mm-dd = 10 characters or
 # XXXXXXXX-yy/mm/dd > 10 characters
+# yyyy-dd mmm yyyy through to dd mmm yyyy > 20 characters
 # Use length to determine year extraction
-if [[ ${#DATE_RANGE} -gt 10 ]]; then
+if [[ ${#DATE_RANGE} -gt 20 ]]; then
+  # Verbose date range provided
+  echo "${DATE_RANGE}: ${#DATE_RANGE} (verbose)"
+  YEAR=$(echo "$DATE_RANGE" | cut -d '-' -f 1)
+elif [[ ${#DATE_RANGE} -gt 10 ]]; then
   # Date range provided
   echo "${DATE_RANGE}: ${#DATE_RANGE}"
   YEAR=$(echo "$DATE_RANGE" | cut -d '-' -f 2 | cut -c1-4)
