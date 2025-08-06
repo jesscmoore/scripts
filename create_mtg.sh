@@ -74,5 +74,5 @@ cat > "${FILENAME}" << EOF
 
 
 
-<!-- markdownlint-disable-file MD036 -->
+<!-- markdownlint-disable-file MD029 MD036 -->
 EOF
