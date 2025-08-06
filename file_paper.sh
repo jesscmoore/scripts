@@ -9,8 +9,8 @@
 
 declare -a FIELDS
 declare -a FOLDERS
-FIELDS=('biod' 'kgraph' 'web' 'solid' 'dis')
-FOLDERS=('biodiversity' 'know_graphs' 'semantic_web' 'solid' 'disaster')
+FIELDS=('biod' 'kgraph' 'web' 'solid' 'dis' 'indig')
+FOLDERS=('biodiversity' 'know_graphs' 'semantic_web' 'solid' 'disaster' 'indigenous')
 
 function usage() {
     echo "Usage: $(basename "$0") 'file' 'research_field"
@@ -52,6 +52,8 @@ case "${FIELD}" in
     FOLDER="${FOLDERS[3]}";;
 "${FIELDS[4]}")
     FOLDER="${FOLDERS[4]}";;
+"${FIELDS[5]}")
+    FOLDER="${FOLDERS[5]}";;
 *)
     echo "Error: Research field not in field list: ";
     exit 1;;
