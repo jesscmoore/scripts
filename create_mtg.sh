@@ -55,7 +55,6 @@ IFS=$OIFS
 # PERSON1=${PEOPLE[0]}
 # echo "Person 1: ${PERSON1}"
 N_PEOPLE=${#PEOPLE[@]}
-echo "people array num: ${N_PEOPLE}"
 
 
 # Form new paper name
