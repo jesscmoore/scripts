@@ -40,8 +40,9 @@ if [ ! -f "$FILE" ]; then
   exit 1
 fi
 
-for i in $(seq 1 ${#FIELDS[@]});
+for i in $(seq 0 ${#FIELDS[@]});
 do
+    echo "Checking ${FIELD} == ${FIELDS[i]}..."
     if [ "${FIELDS[i]}" == "${FIELD}" ]; then
         FOLDER="${FOLDERS[i]}";
         break;
