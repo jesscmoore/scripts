@@ -54,31 +54,75 @@ if [[ -n "$1"  &&  -e "$1" ]]; then
         if [ "$f" != "$g" ]; then
             mv "$f" "$g"
             echo "Replaced ' ' with '_'"
+            f=$g # Update f
         else
             echo "No spaces found in filename."
         fi
 
         # Replace " - " with "-"
-        i="${g//_-_/-}"
-        if [ "$g" != "$i" ]; then
-            mv "$g" "$i"
+        g="${f//_-_/-}"
+        if [ "$f" != "$g" ]; then
+            mv "$f" "$g"
             echo "Replaced ' - ' with '-'"
+            f=$g # Update f
         else
             echo "No hyphens in spaces found in filename."
         fi
 
+        # Replace "," with ""
+        g="${f//,/}"
+        if [ "$f" != "$g" ]; then
+            mv "$f" "$g"
+            echo "Replaced ',' with ''"
+            f=$g # Update f
+        else
+            echo "No commas found in filename."
+        fi
+
+        # Replace "+" with ""
+        g="${f//+/_}"
+        if [ "$f" != "$g" ]; then
+            mv "$f" "$g"
+            echo "Replaced '+' with '_'"
+            f=$g # Update f
+        else
+            echo "No + found in filename."
+        fi
+
+        # Replace "[]" with ""
+        g="${f//[][]/}"
+        if [ "$f" != "$g" ]; then
+            mv "$f" "$g"
+            echo "Replaced '[]' with ''"
+            f=$g # Update f
+        else
+            echo "No [] found in filename."
+        fi
+
+        # Replace "()" with ""
+        # sed better than parameter expansion
+        # shellcheck disable=SC2001
+        g=$(echo "$f" | sed 's/(\([^)]*\))/\1/g')
+        if [ "$f" != "$g" ]; then
+            mv "$f" "$g"
+            echo "Replaced '()' with ''"
+            f=$g # Update f
+        else
+            echo "No () found in filename."
+        fi
+
         # Prepend with last modified date
         if $show_date; then
-            DATE_SUMM=$(stat -f %Sm -t %Y%m%d "$i")
-            j="${DATE_SUMM}-$i"
-            mv "$i" "$j"
+            DATE_SUMM=$(stat -f %Sm -t %Y%m%d "$f")
+            g="${DATE_SUMM}-$f"
+            mv "$f" "$g"
             echo "Prepending file with today's date."
-            i=$j
+            f=$g
         fi
 
         # Print recently changed matching files
         # shellcheck disable=SC2012
-        ls -l "$i"
+        ls -l "$f"
     fi
 
 else
