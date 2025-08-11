@@ -8,17 +8,20 @@
 # - replaces " - " with "-"
 
 function usage() {
-    echo "Usage: $0 [-d] [file]"
+    echo "Usage: $0 [-d] file [year]"
     echo ""
     echo "Description: Converts Windows style filenames with spaces to "
     echo "linux style whitespace free filenames, either for all files in "
-    echo "the current directory or a specified file."
+    echo "the current directory or a specified file. Only one of '-d' or "
+    echo "'-y' may be used."
     echo ""
     echo "Arguments:"
     echo "  file: Name of file to fix the filename of. (No default)."
+    echo "  year: Year of file creation/publication. (Default: current year)."
     echo ""
     echo "Flags:"
-    echo "  -d:   Prepend file with last modified date. (No default)."
+    echo "  -d:   Prepend file with last modified date. (Default: false)."
+    echo "  -y:   Prepend file with user provided year or current year. (Default: false)."
     echo ""
     exit 1 # Exit with a non-zero status to indicate an error
 }
@@ -28,13 +31,15 @@ if [[ $* == *"help"* || $* == *"-h"* ]]; then
 fi
 
 # By default, is_shell is false
-show_date=false
+show_mod_date=false
+show_year=false
 
 # Parse arguments and flags
-while getopts :hd opt; do
+while getopts :hdy opt; do
     case $opt in
         h) usage;;
-        d) show_date=true;;
+        d) show_mod_date=true;;
+        y) show_year=true;;
         :) echo "Missing argument for option -$OPTARG"; exit 1;;
        \?) echo "Unknown option -$OPTARG"; exit 1;;
     esac
@@ -43,6 +48,16 @@ done
 # Shift positional parameters to remove processed options
 shift $(( OPTIND - 1 ))
 
+# Exit if user selected show_year and show_mod_date
+if [[ $show_year == true && $show_mod_date == true ]]; then
+    usage
+fi
+
+if [[ -n "$2" ]]; then
+    YEAR="$2"
+elif [[ $show_year ]]; then
+    YEAR=$(date "+%Y")
+fi
 
 # Filename supplied
 if [[ -n "$1"  &&  -e "$1" ]]; then
@@ -112,11 +127,19 @@ if [[ -n "$1"  &&  -e "$1" ]]; then
         fi
 
         # Prepend with last modified date
-        if $show_date; then
+        if $show_mod_date; then
             DATE_SUMM=$(stat -f %Sm -t %Y%m%d "$f")
             g="${DATE_SUMM}-$f"
             mv "$f" "$g"
             echo "Prepending file with today's date."
+            f=$g
+        fi
+
+        # Prepend with year
+        if $show_year; then
+            g="${YEAR}-$f"
+            mv "$f" "$g"
+            echo "Prepending file with year."
             f=$g
         fi
 
