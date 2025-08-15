@@ -111,8 +111,17 @@ elif [[ ${#DATE_RANGE} -gt 10 ]]; then
   YEAR=$(echo "$DATE_RANGE" | cut -d '-' -f 2 | cut -c1-4)
 else
   # Single date provided
-  echo "${DATE_RANGE}: ${#DATE_RANGE}"
-  YEAR=$(echo "$DATE_RANGE" | cut -c1-4)
+
+  if [[ "${DATE_RANGE:((4)):1}" == "-" ]]; then
+    echo "Formatted with year first"
+    echo "${DATE_RANGE}: ${#DATE_RANGE}"
+    YEAR=$(echo "$DATE_RANGE" | cut -c1-4)
+  else
+    echo "Formatted with year last"
+    echo "${DATE_RANGE}: ${#DATE_RANGE}"
+    YEAR=$(echo "$DATE_RANGE" | cut -c7-10)
+  fi
+
 fi
 
 
