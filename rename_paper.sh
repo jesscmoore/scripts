@@ -109,7 +109,7 @@ elif [[ ${#DATE_RANGE} -gt 10 ]]; then
   # Date range provided
   echo "${DATE_RANGE}: ${#DATE_RANGE}"
   YEAR=$(echo "$DATE_RANGE" | cut -d '-' -f 2 | cut -c1-4)
-else
+elif [[ ${#DATE_RANGE} -gt 4 ]]; then
   # Single date provided
 
   if [[ "${DATE_RANGE:((4)):1}" == "-" ]]; then
@@ -121,6 +121,10 @@ else
     echo "${DATE_RANGE}: ${#DATE_RANGE}"
     YEAR=$(echo "$DATE_RANGE" | cut -c7-10)
   fi
+
+else
+  # Year provided only
+  YEAR=$DATE_RANGE
 
 fi
 
@@ -155,6 +159,6 @@ mv "${PAPERNAME}" "${NEWPAPERNAME}"
 ls -l "${NEWPAPERNAME}"
 
 # Clean up
-rm "$BIBXML"
+# rm "$BIBXML"
 
 echo "Done."
