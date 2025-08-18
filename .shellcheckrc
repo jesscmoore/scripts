@@ -1,0 +1,3 @@
+# .shellcheckrc
+
+disable=SC2001 # parameterisation for search/replace
