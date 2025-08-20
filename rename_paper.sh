@@ -159,6 +159,6 @@ mv "${PAPERNAME}" "${NEWPAPERNAME}"
 ls -l "${NEWPAPERNAME}"
 
 # Clean up
-# rm "$BIBXML"
+rm "$BIBXML"
 
 echo "Done."
