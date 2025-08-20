@@ -160,5 +160,6 @@ ls -l "${NEWPAPERNAME}"
 
 # Clean up
 rm "$BIBXML"
+rm "$BIB"
 
 echo "Done."
