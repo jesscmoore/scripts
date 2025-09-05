@@ -49,7 +49,7 @@ BASENAME=$(basename "$BIB")
 case "${EXT}" in
 'xml')
     BIBXML=$BIB;;
-'ris'|'nbib')
+'ris'|'nbib'|'bib')
     echo "Converting ${BIB} to .xml format."
     BIBXML="${BASENAME}.xml";
 
@@ -59,6 +59,8 @@ case "${EXT}" in
             ris2xml "$BIB" > "$BIBXML";;
         'nbib')
             nbib2xml "$BIB" > "$BIBXML";;
+        'bib')
+            bib2xml "$BIB" > "$BIBXML";;
     esac;;
 *)
     echo "Error ${BIB} is not in a supported file format.";
@@ -105,7 +107,7 @@ if [[ ${#DATE_RANGE} -gt 20 ]]; then
   # Verbose date range provided
   echo "${DATE_RANGE}: ${#DATE_RANGE} (verbose)"
   YEAR=$(echo "$DATE_RANGE" | cut -d '-' -f 1)
-elif [[ ${#DATE_RANGE} -gt 10 ]]; then
+elif [[ ${#DATE_RANGE} -gt 11 ]]; then
   # Date range provided
   echo "${DATE_RANGE}: ${#DATE_RANGE}"
   YEAR=$(echo "$DATE_RANGE" | cut -d '-' -f 2 | cut -c1-4)
