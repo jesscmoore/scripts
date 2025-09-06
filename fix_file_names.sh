@@ -94,7 +94,7 @@ if [[ -n "$1"  &&  -e "$1" ]]; then
             echo "No commas found in filename."
         fi
 
-        # Replace "+" with ""
+        # Replace "+" with "_"
         g="${f//+/_}"
         if [ "$f" != "$g" ]; then
             mv "$f" "$g"
@@ -102,6 +102,16 @@ if [[ -n "$1"  &&  -e "$1" ]]; then
             f=$g # Update f
         else
             echo "No + found in filename."
+        fi
+
+        # Replace double underscore "__" with "_"
+        g="${f/__/+/_}"
+        if [ "$f" != "$g" ]; then
+            mv "$f" "$g"
+            echo "Replaced '__' with '_'"
+            f=$g # Update f
+        else
+            echo "No __ found in filename."
         fi
 
         # Replace "[]" with ""
