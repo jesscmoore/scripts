@@ -9,8 +9,8 @@
 
 declare -a FIELDS
 declare -a FOLDERS
-FIELDS=('biod' 'kgraph' 'web' 'solid' 'dis' 'indig')
-FOLDERS=('biodiversity' 'know_graphs' 'semantic_web' 'solid' 'disaster' 'indigenous')
+FIELDS=('biod' 'kgraph' 'web' 'solid' 'dis' 'indig' 'privacy')
+FOLDERS=('biodiversity' 'know_graphs' 'semantic_web' 'solid' 'disaster' 'indigenous' 'privacy')
 
 function usage() {
     echo "Usage: $(basename "$0") 'file' 'research_field"
