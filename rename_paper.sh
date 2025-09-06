@@ -78,7 +78,7 @@ if [[ -z $AUTHORS ]]; then
     exit 1
 fi
 
-AUTHOR1=$(echo "$AUTHORS" | head -n 1)
+AUTHOR1=$(echo "$AUTHORS" | head -n 1 | sed 's/ /_/g')
 N_AUTHORS=$(echo "$AUTHORS" | wc -l)
 
 # Extract publication year from xml
@@ -140,7 +140,7 @@ if [ "$N_AUTHORS" -eq "1" ]; then
 elif [ "$N_AUTHORS" -eq "2" ]; then
 
     # 2 authors
-    AUTHOR2=$(echo "$AUTHORS" |head -n 2 | tr '\n' '_')
+    AUTHOR2=$(echo "$AUTHORS" |head -n 2 | tr '\n' '_' | sed 's/ /_/g')
     AUTHOR_STR="${AUTHOR1}_${AUTHOR2}"
 
 else
