@@ -10,13 +10,20 @@
 
 SCRIPT_FILE=${1}.sh
 COMMAND=${1}
-SCRIPT_DIR="${HOME}/Documents/scripts"
+SCRIPT_DIR=$(pwd)
+SCRIPT_PATH="${SCRIPT_DIR}/${SCRIPT_FILE}"
 BIN_DIR="${HOME}/bin"
 
-echo "Script file: ${SCRIPT_DIR}/${SCRIPT_FILE}"
+echo "Script file: ${SCRIPT_PATH}"
 echo "Command to be created ${COMMAND}"
 
-chmod u+x ${SCRIPT_DIR}/${SCRIPT_FILE}
-ln -s ${SCRIPT_DIR}/${SCRIPT_FILE} ${BIN_DIR}/${COMMAND}
-echo "Created ${COMMAND}"
-ls -l ${HOME}/bin/${COMMAND}
+if [[ -f $SCRIPT_PATH ]]; then
+
+    chmod u+x "${SCRIPT_PATH}"
+    ln -s "${SCRIPT_PATH}" "${BIN_DIR}"/"${COMMAND}"
+    echo "Done: created ${COMMAND}"
+    ls -l "${HOME}"/bin/"${COMMAND}"
+ else
+    echo "Error: missing $SCRIPT_PATH.";
+    exit 1;
+fi;
