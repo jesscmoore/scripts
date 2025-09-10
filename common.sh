@@ -135,7 +135,7 @@ runSSH () {
 
     printf "\n" 1>&2
     printf -- '-%.0s' {1..72} 1>&2
-    printf "\n$(date '+%Y%m%d %H%M%S') SSH ${_USER}@${_HOST}\n" 1>&2
+    printf "\n$(date '+%Y%m%d %H%M%S') SSH %s@$%s\n" 1>&2 "${_USER}" "{_HOST}"
     printf -- '-%.0s' {1..72} 1>&2
     printf "\n" 1>&2
     ssh -q -o "StrictHostKeyChecking=no" -o "LogLevel=ERROR" "${_USER}@${_HOST}" 1>&2 "${_COMMAND}"
@@ -153,7 +153,7 @@ testURL () {
 	RESPONSE="$(${CURL} "${URL}")"
     fi
 
-    if echo "${RESPONSE}" | egrep "${PAT}" >/dev/null; then
+    if echo "${RESPONSE}" | grep -E "${PAT}" >/dev/null; then
 	printf "PASS: %s returned the expected response.\n" "${URL}"
 	result=0
     else
