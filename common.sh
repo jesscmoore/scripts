@@ -6,12 +6,14 @@
 # bare metal server has been provisioned with Ubuntu and the LIN_JSON
 # file contains the reported configuration.
 
-SCRIPT=$(basename $0 .sh)
+# shellcheck disable=SC2034,SC1090
+
+SCRIPT=$(basename "$0" .sh)
 
 # Check if the current shell is bash.
 
 if [ -z "$BASH_VERSION" ]; then
-  printf "ERROR: $0: Please execute this script using Bash shell.\n"
+  printf "ERROR: %s: Please execute this script using Bash shell.\n" "$0"
   exit 1
 fi
 
@@ -23,7 +25,7 @@ fi
 
 if [ -n "$1" ]; then
     HOST_NAME="$1"
-    HOST_IP=$(dig +short ${HOST_NAME})
+    HOST_IP=$(dig +short "${HOST_NAME}")
 fi
 
 # Currently assumes using linode server. The specific Linode account to be used
@@ -63,14 +65,14 @@ if [[ -z "${HOST_NAME}" || "${SCRIPT}" == "provision_linode" ]]; then
 	 LIN_ID=$(jq -r '.[].id' ${LIN_JSON})
 
 	 if [ -z "${HOST_NAME}" ]; then
-	     printf "ERROR: $0: HOST_NAME not found in '${LIN_JSON}'\n"
+	     printf "ERROR: %s: HOST_NAME not found in '%s'\n" "$0" "${LIN_JSON}"
 	     exit 1
 	 elif [ -z "${HOST_IP}" ]; then
-	     printf "ERROR: $0: HOST_IP not found in '${LIN_JSON}'\n"
+	     printf "ERROR: %s: HOST_IP not found in '%s'\n" "$0" "${LIN_JSON}"
 	     exit 1
 	 fi
      else
-	 printf "ERROR: $0: no host name supplied and no '${LIN_JSON}\n'"
+	 printf "ERROR: %s: no host name supplied and no '%s\n'" "$0" "${LIN_JSON}"
 	 exit 1
      fi
 fi
@@ -78,7 +80,7 @@ fi
 if [ -e ${LIN_JSON} ]; then
     LIN_ID=$(jq -r '.[].id' ${LIN_JSON})
     if [ -z "${LIN_ID}" ]; then
-	printf "ERROR: $0: LIN_ID not found in '${LIN_JSON}'\n"
+	printf "ERROR: %s: LIN_ID not found in '%s'\n" "$0" "${LIN_JSON}"
 	exit 1
     fi
 fi
@@ -86,7 +88,7 @@ fi
 if [ -e ${OPAL_SECRET} ]; then
     OPAL_TOKEN=$(cat ${OPAL_SECRET})
 else
-    printf "ERROR: $0: OPAL_TOKEN file not found \n"
+    printf "ERROR: %s: OPAL_TOKEN file not found \n" "$0"
     exit 1
 fi
 
@@ -95,16 +97,16 @@ fi
 # Support functions
 
 beginLOG () {
-    printf "$*"
+    printf "%s" "$*"
     printf '#%.0s' {1..72} 1>&2
-    printf "\n## $(date '+%Y%m%d %H%M%S') BEGIN ${SCRIPT}\n##\n## " 1>&2
-    printf "$*\n" 1>&2
+    printf "\n## $(date '+%Y%m%d %H%M%S') BEGIN %s\n##\n## " 1>&2 "${SCRIPT}"
+    printf "%s\n" 1>&2 "$*"
 }
 
 addLOG () {
     printf "\n" 1>&2
     printf '#%.0s' {1..18} 1>&2
-    printf "\n## $(date '+%Y%m%d %H%M%S') $* \n" 1>&2
+    printf "\n## $(date '+%Y%m%d %H%M%S') %s \n" 1>&2 "$*"
     printf '#%.0s' {1..18} 1>&2
     printf "\n" 1>&2
 }
@@ -112,7 +114,7 @@ addLOG () {
 dotLOG () { printf "."; }
 
 endLOG () {
-    printf "\n##\n## $(date '+%Y%m%d %H%M%S') END ${SCRIPT}\n" 1>&2
+    printf "\n##\n## $(date '+%Y%m%d %H%M%S') END %s\n" 1>&2 "${SCRIPT}"
     printf '#%.0s' {1..72} 1>&2
     printf "\n" 1>&2
     printf " DONE\n"
@@ -121,7 +123,7 @@ endLOG () {
 runSSH () {
     # For FAIS on ITS servers
 
-    if [ $1 = 'root' ] && [ ! -z "${ITS_SERVER}" ]; then
+    if [ "$1" = 'root' ] && [ ! -z "${ITS_SERVER}" ]; then
         _USER=${ITS_USER}
         _HOST=${ITS_SERVER}
         _COMMAND="sudo bash"
@@ -136,7 +138,7 @@ runSSH () {
     printf "\n$(date '+%Y%m%d %H%M%S') SSH ${_USER}@${_HOST}\n" 1>&2
     printf -- '-%.0s' {1..72} 1>&2
     printf "\n" 1>&2
-    ssh -q -o "StrictHostKeyChecking=no" -o "LogLevel=ERROR" ${_USER}@${_HOST} 1>&2 ${_COMMAND}
+    ssh -q -o "StrictHostKeyChecking=no" -o "LogLevel=ERROR" "${_USER}@${_HOST}" 1>&2 "${_COMMAND}"
 }
 
 CURL="curl --silent"
@@ -148,20 +150,20 @@ testURL () {
     if [ -n "$3" ]; then
 	RESPONSE="$3"
     else
-	RESPONSE="$(${CURL} ${URL})"
+	RESPONSE="$(${CURL} "${URL}")"
     fi
 
-    if echo ${RESPONSE} | egrep "${PAT}" >/dev/null; then
-	printf "PASS: ${URL} returned the expected response.\n"
+    if echo "${RESPONSE}" | egrep "${PAT}" >/dev/null; then
+	printf "PASS: %s returned the expected response.\n" "${URL}"
 	result=0
     else
-	printf "FAIL: ${URL} did NOT return the expected response:\n"
+	printf "FAIL: %s did NOT return the expected response:\n" "${URL}"
 	printf "===================================\n"
 	printf "EXPECTED TO CONTAIN\n\n"
-	printf "${PAT}\n"
+	printf "%s\n" "${PAT}"
 	printf ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n"
 	printf "OBTAINED\n\n"
-	printf "${RESPONSE}"
+	printf "%s" "${RESPONSE}"
 	printf "\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n"
 	result=1
     fi
@@ -178,9 +180,9 @@ testURL () {
 CONFIGS=./configs/${HOST_NAME}.sh
 
 if [[ -e ${CONFIGS} ]]; then
-    . ${CONFIGS};
+    . "${CONFIGS}";
 else
-    printf "ERROR: $0: No config file '${CONFIGS}'.\n"
+    printf "ERROR: %s: No config file '%s'.\n" "$0" "S{CONFIGS}"
     exit 1
 fi
 
