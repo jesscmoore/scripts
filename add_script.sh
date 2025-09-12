@@ -4,9 +4,23 @@
 #
 # Make script executable and add to ${HOME}/bin
 #
-# Usage:
-# bash add_script.sh [script_name]
-# where [script_name] is the name of the script without the suffix .sh
+
+function usage() {
+    echo "Usage: $(basename "$0") 'file'"
+    echo ""
+    echo "Description: This script makes the target script with name"
+    echo "             [file].sh executable and copies it to "
+    echo "             ~/bin where it is accessible in the PATH."
+    echo ""
+    echo "Arguments:"
+    echo "  file:      Name of script (excluding .sh)."
+    echo ""
+    exit 1 # Exit with a non-zero status to indicate an error
+}
+
+if [[ $# -eq 0 || $* == *"help"* || $* == *"-h"* ]]; then
+    usage
+fi
 
 SCRIPT_FILE=${1}.sh
 COMMAND=${1}
