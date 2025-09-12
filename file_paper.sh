@@ -7,10 +7,12 @@
 #
 # Usage: bash file_paper.sh "file" "research_field"
 
+IFS=,
 declare -a FIELDS
 declare -a FOLDERS
 FIELDS=('biod' 'kgraph' 'web' 'solid' 'dis' 'indig' 'privacy')
 FOLDERS=('biodiversity' 'know_graphs' 'semantic_web' 'solid' 'disaster' 'indigenous' 'privacy')
+joined_fields="${FIELDS[*]}"
 
 function usage() {
     echo "Usage: $(basename "$0") 'file' 'research_field"
@@ -20,13 +22,12 @@ function usage() {
     echo ""
     echo "Arguments:"
     echo "  file:             Academic paper filename."
-    printf -v joined_fields '%s, ' "${FIELDS[@]}"
-    echo "  research_field:   Research field category (${joined_fields})"
+    echo "  research_field:   Research field category (Options: ${joined_fields})"
     echo ""
     exit 1 # Exit with a non-zero status to indicate an error
 }
 
-if [[ $# -eq 0 ]]; then
+if [[ $# -eq 0 || $* == *"--help"* || $* == *" -h"* ]]; then
     usage
 fi
 
