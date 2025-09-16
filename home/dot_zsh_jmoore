@@ -1,8 +1,11 @@
+#!/bin/zsh
+#
 # Time-stamp: <Tuesday 2025-02-04 21:34:01 Jess Moore>
 #
 # User zsh configuration
+# shellcheck disable=SC1071
 echo "Sourcing ~/.zsh_jmoore"
-cd ~/Documents
+cd ~/Documents || return
 
 # Add ~/bin to $PATH.
 export PATH=$HOME/bin:$PATH
@@ -22,6 +25,10 @@ fi
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+# Dart
+# `dart pub` installs executables into $HOME/.pub-cache/bin. Eg. for import_order_lint
+# dart pub global activate import_order_lint
+export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 # Runs cow_quote to render fortune/my quote as cowsay or cowthink
 # Source: fortune or ~/quotes.json
