@@ -55,12 +55,12 @@ echo "Version tagging file: ${FILE}.${TYPE}"
 ARCHIVE_DIR="earlier_versions"
 CURRENT_DIR="current_tagged_versions"
 
-if [ ! -d "$ARCHIVE_DIR" ]; then
+if [[ ! -d "$ARCHIVE_DIR" ]]; then
   mkdir -p "$ARCHIVE_DIR"
   echo "Created ${ARCHIVE_DIR}."
 fi
 
-if [ ! -d "$CURRENT_DIR" ]; then
+if [[ ! -d "$CURRENT_DIR" ]]; then
     mkdir -p "${CURRENT_DIR}"
     echo "Created ${CURRENT_DIR}."
     NEW_VERSION="v1"
@@ -98,7 +98,9 @@ NEW_FILE="${FILE}_${NEW_VERSION}.${TYPE}"
 cp -p "${FILE}.${TYPE}" "${CURRENT_DIR}/${NEW_FILE}"
 
 # Move older version to earlier versions folder
-mv "${CURRENT_DIR}/${OLD_FILE}" "${ARCHIVE_DIR}/${OLD_FILE}"
+if [[ $NCURR_FILES -gt 0 ]]; then
+    mv "${CURRENT_DIR}/${OLD_FILE}" "${ARCHIVE_DIR}/${OLD_FILE}"
+fi
 
 # Show results
 echo ""
