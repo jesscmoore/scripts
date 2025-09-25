@@ -37,7 +37,7 @@ FILENAME=$FILEBASE.sh
 cat > "${FILENAME}" << EOF
 #!/bin/bash
 #
-# Time-stamp: <${NOW} ${NAME}>
+# Time-stamp: ${NOW} ${NAME}
 #
 # ${DESC}
 #
