@@ -27,8 +27,8 @@ COMMENT=$2
 
 git tag -a "v${TAG}" -m "${COMMENT}"
 
-echo "Showing last 3 tags"
-git tag -l "v*" | head -n 3
+echo "Pushing tags"
+git push origin --tags
 
 echo ""
 echo "More info:"
