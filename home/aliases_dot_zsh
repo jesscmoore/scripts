@@ -35,7 +35,9 @@ alias lscripts='ls $HOME/bin'
 # Navigate
 alias cdocs='cd ~/Documents'
 alias cdown="cd ~/Downloads"
+alias cmtgs="cd ~/Documents/private/mtgs"
 alias cnotes="cd ~/Documents/private/notes"
+alias ctalks="cd ~/Documents/private/talks"
 alias comz="cd ~/.oh-my-zsh"
 alias cposts="cd ~/Documents/jesscmoore.github.io/_posts"
 alias cpriv='cd ~/Documents/private'
