@@ -30,10 +30,6 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-# POETRY SETUP
-# Configure poetry to save environment in project folder
-poetry config virtualenvs.in-project true
-
 
 # R SETUP
 # R installed at: /opt/homebrew/bin/R
@@ -75,3 +71,9 @@ alias r="radian"
 
 # Created by `pipx` on 2024-03-07 22:34:37
 export PATH="$PATH:$HOME/.local/bin"
+
+
+# POETRY SETUP
+# Configure poetry to save environment in project folder
+# Reqs $HOME/.local/bin in path
+poetry config virtualenvs.in-project true
