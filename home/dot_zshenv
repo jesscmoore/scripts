@@ -1,2 +1,4 @@
+#!/bin/zsh
+
 # Flutter
 export PATH=$HOME/.gem/bin:$PATH
