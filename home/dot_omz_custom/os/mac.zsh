@@ -37,6 +37,8 @@ fi
 
 # FLUTTER
 export PATH="$PATH:$HOME/lib/flutter/bin"
+# dart/flutter pub installs executables into $HOME/.pub-cache/bin
+export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 
 # R wattleclir package
