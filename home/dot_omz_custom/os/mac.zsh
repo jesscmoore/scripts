@@ -40,12 +40,6 @@ export PATH="$PATH:$HOME/lib/flutter/bin"
 # dart/flutter pub installs executables into $HOME/.pub-cache/bin
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 
-# Markdownlint
-# markdownlint (Used in gjw flutter lint workflows. Instead I use installed as markdownlint-cli2 for better config)
-# https://github.com/DavidAnson/markdownlint-cli2
-# alias markdownlint='markdownlint-cli2'
-ln -s /opt/homebrew/bin/markdownlint-cli2 $HOME/bin/markdownlint
-
 
 # R wattleclir package
 export PATH=$PATH:~/bin
