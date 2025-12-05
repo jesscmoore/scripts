@@ -79,3 +79,8 @@ export PATH="$PATH:$HOME/.local/bin"
 # Configure poetry to save environment in project folder
 # Reqs $HOME/.local/bin in path
 poetry config virtualenvs.in-project true
+
+
+# BASH
+# GNU getopt
+export PATH="/opt/homebrew/opt/gnu-getopt/bin:$PATH"
