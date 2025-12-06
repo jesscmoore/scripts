@@ -121,6 +121,13 @@ migrate_working_dir/
 .pub/
 /build/
 
+# Flutter ios/macos
+# update_project.sh generated project files - backups
+macos/Podfile-*
+ios/Podfile-*
+# xcodegen generated project files - backups
+macos/Runner.xcodeproj/project-*.pbxproj
+
 # Symbolication related
 app.*.symbols
 
