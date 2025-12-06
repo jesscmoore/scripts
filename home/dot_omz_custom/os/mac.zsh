@@ -80,7 +80,12 @@ export PATH="$PATH:$HOME/.local/bin"
 # Reqs $HOME/.local/bin in path
 poetry config virtualenvs.in-project true
 
-
 # BASH
 # GNU getopt
 export PATH="/opt/homebrew/opt/gnu-getopt/bin:$PATH"
+
+# GNU sed
+export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
+
+# Updated bash
+export PATH="/opt/homebrew/opt/bash/bin:$PATH"
