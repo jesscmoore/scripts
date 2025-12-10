@@ -13,7 +13,8 @@ function usage() {
     echo ""
     echo "Arguments:"
     echo "  py_ver:   Numeric python version eg 3.13.0"
-    echo "  env_name: Name of project virtual environment."
+    echo "  env_name: Name of project virtual environment, where env_name"
+    echo "            should match current directory and top level of"  echo "            project."
     echo ""
     exit 1 # Exit with a non-zero status to indicate an error
 }
@@ -22,17 +23,32 @@ if [[ $# -eq 0 || $* == *"help"* || $* == *"-h"* ]]; then
     usage
 fi
 
-PYVER="$1"
-ENVNAME="$2"
+if [[ $# -eq 2 ]]; then
+    PYVER="$1"
+    ENVNAME="$2"
+fi
 
-pyenv install "${PYVER}"
+PWD=$(pwd)
+CURR_FOLDER=$(basename "$PWD")
+if [[ ${CURR_FOLDER != "${ENV_NAME}"} ]]; then
+    echo "Expects env_name ${ENV_NAME} to match current working directory and "
+    echo "top level of project."
+    usage
+fi
+
+# Show current versions
+installed=$(pyenv versions)
+if echo "${installed}" | grep "${PYVER}" >/dev/null; then
+    echo "Selected py version already installed"
+else
+    echo "Selected py version not installed, installing now..."
+    pyenv install "${PYVER}"
+fi
 
 # Create virtual environment
 pyenv virtualenv "${PYVER}" "${ENVNAME}"
 
-# Check environment created
-pyenv virtualenvs
+# Activate local environment in current directory
+pyenv local "${ENVNAME}"
 
-#
-pyenv local markit
-pyenv activate "${PYVER}/envs/${ENVNAME}"
+echo "Done."
