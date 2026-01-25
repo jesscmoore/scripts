@@ -23,7 +23,7 @@ function usage() {
     exit 1 # Exit with a non-zero status to indicate an error
 }
 
-if [[ $# -eq 0 ]]; then
+if [[ $# -eq 0 || $* == *"help"* || $* == *"-h"* ]]; then
     usage
 fi
 
@@ -71,11 +71,15 @@ esac
 # Extract first author from xml
 AUTHORS=$(xml sel -N x="http://www.loc.gov/mods/v3" -t -v "//x:mods[@ID]/x:name[@type='personal']/x:namePart[@type='family']" "$BIBXML")
 
-echo "Authors: ${AUTHORS}"
-
+# Prompt for author/s string if not in bib file
 if [[ -z $AUTHORS ]]; then
-    echo "Error: Author names were not parsed from ${BIB}."
-    exit 1
+    while true; do
+        read -r -p "Provide Author full names separated by '\n': " AUTHORS
+        break
+    done
+    echo "User provided authors: ${AUTHORS}"
+else 
+    echo "Authors: ${AUTHORS}"
 fi
 
 AUTHOR1=$(echo "$AUTHORS" | head -n 1 | sed 's/ /_/g')
