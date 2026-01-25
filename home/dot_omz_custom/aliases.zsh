@@ -28,6 +28,8 @@ alias grepnr='grep -nr'
 # List
 alias ldocs="ls -lt ~/Documents"
 alias ldown='ls -lt ~/Downloads |head -n 7'
+alias ldownmore='ls -lt ~/Downloads |head -n 20'
+alias ldownall='ls -lt ~/Downloads |more'
 alias lomz="ls -l ~/.oh-my-zsh"
 alias lnotes="ls -lt ~/Documents/private/notes"
 alias lposts="ls ~/Documents/jesscmoore.github.io/_posts"
