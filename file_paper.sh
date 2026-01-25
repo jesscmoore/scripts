@@ -27,13 +27,16 @@ function usage() {
     exit 1 # Exit with a non-zero status to indicate an error
 }
 
-if [[ $# -eq 0 || $* == *"--help"* || $* == *" -h"* ]]; then
+if [[ $# -eq 0 || $* == *"--help"* || $* == *" -h"* || $# -ne 2 ]]; then
     usage
 fi
 
 FILE=$1
 FIELD=$2
 
+echo "Filing:"
+echo "File: $FILE"
+echo "In field: $FIELD"
 
 # Check paper exists
 if [ ! -f "$FILE" ]; then
@@ -41,10 +44,10 @@ if [ ! -f "$FILE" ]; then
   exit 1
 fi
 
-for i in $(seq 0 ${#FIELDS[@]});
+for (( i=0; i<${#FIELDS[@]}; i++ ));
 do
-    echo "Checking ${FIELD} == ${FIELDS[i]}..."
-    if [ "${FIELDS[i]}" == "${FIELD}" ]; then
+    echo "Checking ${FIELD} == ${FIELDS[$i]}..."
+    if [ "${FIELDS[$i]}" == "${FIELD}" ]; then
         FOLDER="${FOLDERS[i]}";
         break;
     elif [[ $i -eq "${#FIELDS[@]}-1" ]]; then
