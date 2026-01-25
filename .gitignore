@@ -6,3 +6,5 @@ support/*env.txt
 support/tmp/*
 
 .vscode/*
+
+.DS_Store*
