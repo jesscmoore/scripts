@@ -6,6 +6,9 @@
 #
 # Usage: bash create_mtg.sh 20230407-notes.md "Mtg with xyz" "Jane, Bob, Liz, Sam" "ANU"
 
+# shellcheck disable=SC2012
+SOURCE=$(ls -l "$(which "$0")" | awk '{print $11}')
+
 function usage() {
     echo "Usage: $(basename "$0") 'title' 'attendee1, attendee2' 'place'"
     echo ""
@@ -19,6 +22,8 @@ function usage() {
     echo "  attendees: Comma separated attendees surrounded "
     echo "             in quotes."
     echo "  place:     Meeting location in quotes, e.g. Teams."
+    echo ""
+    echo "Source: $SOURCE"
     echo ""
     exit 1 # Exit with a non-zero status to indicate an error
 }

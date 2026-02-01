@@ -6,6 +6,9 @@
 #
 # Usage: create_bash.sh new_script.sh "Does xyz"
 
+# shellcheck disable=SC2012
+SOURCE=$(ls -l "$(which "$0")" | awk '{print $11}')
+
 function usage() {
     echo "Usage: $(basename "$0") 'file' 'desc'"
     echo ""
@@ -19,6 +22,8 @@ function usage() {
     echo "Arguments:"
     echo "  file:      Name of script (excluding .sh)."
     echo "  desc:      One line description of script."
+    echo ""
+    echo "Source: $SOURCE"
     echo ""
     exit 1 # Exit with a non-zero status to indicate an error
 }
