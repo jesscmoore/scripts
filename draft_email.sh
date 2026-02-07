@@ -7,13 +7,12 @@
 # Usage: draft_email.sh [args...]
 
 function usage() {
-    echo "Usage: draft_email.sh [args...]"
+    echo "Usage: draft_email recipient"
     echo ""
     echo "Description: Create a draft of an email in markdown."
     echo ""
     echo "Arguments:"
-    echo "  arg1:      ..."
-    echo "  arg2:      ..."
+    echo "  recipient:  Name of recipient"
     echo ""
     exit 1 # Exit with a non-zero status to indicate an error
 }
@@ -61,7 +60,8 @@ ${SENDER_FIRSTNAME}
 
 
 
-<!-- markdownlint-disable-file MD029 MD036 MD041 -->
+<!-- markdownlint-disable-file MD009 MD012 MD013 MD029 MD036 MD041 -->
+<!-- Ignores line length limit, no trailing spaces, multiple blanks, etc -->
 EOF
 
 echo "Done"
