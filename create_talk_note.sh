@@ -87,7 +87,10 @@ cat > "${FILENAME}" << EOF
 
 
 
-<!-- markdownlint-disable-file MD036 -->
+<!-- markdownlint-disable-file MD009 MD013 MD036 -->
+<!-- MD013 - line limit -->
+<!-- MD009 - no trailing spaces -->
+<!-- MDo36 - emphasised text as heading -->
 EOF
 
 ls -l "${FILENAME}"
