@@ -42,33 +42,51 @@ if [ -n "$3" ]; then
     MTG=$3
 fi
 
-# Make file name with syntax YYMMDD-speakers.md
-# Convert speakers to lc, replace ", " with line end "\n"
-# SPEAKERS_SUMM=$(echo "${SPEAKERS}" | awk '{print tolower($0);}' | sed 's/  / /g;s/ //g;s/,/\n/g')
 
-## Remove double spaces and line split
-SPEAKERS_LS=$(echo "${SPEAKERS}" | sed 's/  / /g;s/, /\n/g')
 
 # Get date in formats for file and title
 DATE_SUMM=$(date "+%Y%m%d")
 DATE_STR=$(date "+%d %b %Y")
 
+
+# Populate speaker and affiliation arrays, and extract speaker details for filenaming
+declare -a SPEAKER_ARR
+declare -a AFFIL_ARR # Use empty array if affiliations not provided
+
+## Remove double spaces and line split
+SPEAKERS_LS=$(echo "${SPEAKERS}" | sed 's/  / /g;s/, /\n/g')
+N_SPEAKERS=$(echo "$SPEAKERS_LS" | wc -l)
+if [ -n "${AFFILS}" ]; then 
+    AFFILS_LS=$(echo "${AFFILS}" | sed 's/  / /g;s/, /\n/g')
+    N_AFFILS=$(echo "$AFFILS_LS" | wc -l)
+fi
 echo "Speakers: "
 echo "${SPEAKERS_LS}"
-
-# SPEAKER1=$(echo "$SPEAKERS_SUMM" | head -n 1)
-N_SPEAKERS=$(echo "$SPEAKERS_LS" | wc -l)
-
 echo "N speakers: $N_SPEAKERS"
+if [ -n "${AFFILS}" ]; then 
+    echo "Affiliations: "
+    echo "${AFFILS_LS}"
+    echo "N affiliations: $N_AFFILS"
+else 
+    N_AFFILS=0
+fi
 
-# Create speaker array
-declare -a SPEAKER_ARR
+echo "Extracting speakers and affiliations..."
 for i in $(seq 0 $((N_SPEAKERS - 1))); do
 
     line_num=$((i+1))
     SPEAKER_ARR[i]="$(echo "$SPEAKERS_LS" | awk "NR==$line_num")"
-    
     echo "$i: ${SPEAKER_ARR[i]}"
+    
+    if [[ $N_AFFILS -gt $i ]]; then 
+        
+        AFFIL_ARR[i]="$(echo "$AFFILS_LS" | awk "NR==$line_num")"
+        
+    else
+        AFFIL_ARR[i]="(Unknown affiliation)"
+    fi
+    
+    echo "$i: ${AFFIL_ARR[i]}"
 
     if [[ "$i" == "0" ]]; then
     
@@ -86,18 +104,18 @@ for i in $(seq 0 $((N_SPEAKERS - 1))); do
 done
 
 # Form speaker string part of filename
-if [[ "$N_SPEAKERS" == 1 ]]; then 
+if [[ ${N_SPEAKERS} -eq 1 ]]; then 
     # 1 speaker
     SPEAKER_STR="${SPEAKER1}"
-    echo "defining speaker_str for 1 speaker"
-elif [[ "$N_SPEAKERS" == 2 ]]; then 
+    echo "Defining filename speaker_str for 1 speaker"
+elif [[ ${N_SPEAKERS} -eq 2 ]]; then 
     # 2 speakers
     SPEAKER_STR="${SPEAKER1}_${SPEAKER2}"
-    echo "defining speaker_str for 2 speakers"
-elif [[ "$N_SPEAKERS" -gt 2 ]]; then 
+    echo "Defining filename speaker_str for 2 speakers"
+elif [[ ${N_SPEAKERS} -gt 2 ]]; then 
     # More than 2 speakers
     SPEAKER_STR="${SPEAKER1}_etal"
-    echo "defining speaker_str for > 2 speakers"
+    echo "Defining filename speaker_str for > 2 speakers"
 
 fi
 
@@ -111,7 +129,9 @@ if [[ -n $MTG ]]; then
     FILENAME="${DATE_SUMM}-${MTG}.md"
     
 else 
+    # Title using speakers
     TITLE="${SPEAKERS} on XYZ"
+    # Make file name with syntax YYMMDD-speakers.md
     FILENAME="${DATE_SUMM}-${SPEAKER_STR}.md"
 fi
     
@@ -121,6 +141,7 @@ cat > "${FILENAME}" << EOF
 # ${TITLE}
 
 *Speakers: ${SPEAKERS}
+
 *Affiliations: ${AFFILS}*
 
 *Date: ${NOW} ${AUTHOR}*
@@ -141,6 +162,7 @@ for i in $(seq 0 $((N_SPEAKERS - 1))); do
 cat >> "${FILENAME}" << EOFF
 ### ${SPEAKER_ARR[i]}
 
+*${AFFIL_ARR[i]}*
 
 
 EOFF
