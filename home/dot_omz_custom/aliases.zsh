@@ -46,3 +46,7 @@ alias cpriv='cd ~/Documents/private'
 
 # Tmp
 alias gotmp='mkdir -p tmp; cd tmp'
+
+# Github - personal shorthand
+# Eg. git log --graph --left-right --cherry-pick --oneline dev...jess/572_perm_history
+alias glc="git log --graph --left-right --cherry-pick --oneline"
