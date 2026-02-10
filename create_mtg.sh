@@ -119,5 +119,10 @@ cat > "${FILENAME}" << EOF
 
 
 
-<!-- markdownlint-disable-file MD029 MD036 -->
+<!-- markdownlint-disable-file  MD009 MD012 MD013 MD029 MD036 -->
+<!-- markdownlint-disable-file MD009 MD012 MD013 MD036 -->
+<!-- MD009 - no trailing spaces -->
+<!-- MD012 - no multiple blanks -->
+<!-- MD013 - line limit -->
+<!-- MD036 - emphasised text as heading -->
 EOF
