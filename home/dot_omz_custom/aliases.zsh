@@ -2,6 +2,9 @@
 #
 # User zsh aliases
 
+# Update aliases
+alias upaliases="cp ~/Documents/scripts/home/dot_omz_custom/aliases.zsh ~/.oh-my-zsh/custom/aliases.zsh"
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -50,3 +53,5 @@ alias gotmp='mkdir -p tmp; cd tmp'
 # Github - personal shorthand
 # Eg. git log --graph --left-right --cherry-pick --oneline dev...jess/572_perm_history
 alias glc="git log --graph --left-right --cherry-pick --oneline"
+# Compressed git log with tags
+alias glgt="git log --pretty=oneline --abbrev-commit"

@@ -5,7 +5,7 @@
 # User zsh configuration
 # shellcheck disable=SC1071
 echo "Sourcing ~/.zsh_jmoore"
-cd ~/Documents || return
+# cd ~/Documents || return
 
 # Add ~/bin to $PATH.
 export PATH=$HOME/bin:$PATH

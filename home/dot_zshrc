@@ -108,8 +108,12 @@ fi
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes.
+#
 # For a full list of active aliases, run `alias`.
+# To search aliases, run `alias | grep [query]`
+#
 # To update personal aliases:
 # edit ~/Documents/scripts/home/dot_omz_custom/aliases.zsh
 # cp ~/Documents/scripts/home/dot_omz_custom/aliases.zsh ~/.oh-my-zsh/custom/aliases.zsh
+#
 # Then source ~/.zshrc to source folder and read new aliases
