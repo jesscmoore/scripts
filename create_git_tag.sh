@@ -12,7 +12,7 @@ function usage() {
     echo "Description: Write a git tag of a file."
     echo ""
     echo "Arguments:"
-    echo "  tag_num:    Tag version number. (Default: none)."
+    echo "  tag_num:    Tag string. Eg. 'v0.4-toCPA-20260226'"
     echo "  comment:    Tag comment. (Default: none)."
     echo "  file:       Optional filename to append tag to and copy "
     echo "              to shared_and_tagged/ folder"
@@ -30,21 +30,21 @@ if [[ $# -eq 3 ]]; then
     FILE=$3
 fi
 
-git tag -a "v${TAG}" -m "${COMMENT}"
+git tag -a "${TAG}" -m "${COMMENT}"
 
 echo "Pushing tags"
 git push --tags
 
 echo ""
 echo "More info:"
-echo "git show v${TAG}"
+echo "git show ${TAG}"
 echo "git log --pretty=oneline --abbrev-commit"
 
 if [[ $# -eq 3 ]]; then 
     EXT="${FILE##*.}"
     BASENAME="${FILE%.*}"
     mkdir -p shared_and_tagged
-    cp -p "${FILE}" "shared_and_tagged/${BASENAME}-v${TAG}.${EXT}"
+    cp -p "${FILE}" "shared_and_tagged/${BASENAME}-${TAG}.${EXT}"
     ls -lt shared_and_tagged
 fi
 
