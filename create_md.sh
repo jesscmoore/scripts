@@ -18,7 +18,8 @@ function usage() {
     exit 1 # Exit with a non-zero status to indicate an error
 }
 
-if [[ $# -ne 2 || $* == *"help"* || $* == *"-h"* ]]; then
+
+if [[ $# -ne 2 || $* == *"help"* || $* == *" -h "* ]]; then
     usage
 fi
 
