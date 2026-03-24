@@ -61,7 +61,8 @@ else
 fi
 
 MODTIME_LOC=$(stat -f %Sm -t %Y%m%d%H%M%S "$FILE")
-echo "Local file $FILE: ${MODTIME_LOC}"
+# Extra white space for aligned modtimes
+echo "Local file  $FILE: ${MODTIME_LOC}"
 
 if [[ ${MODTIME_REM} > ${MODTIME_LOC} ]]; then 
     echo "Remote file is more recent -> pull FROM remote"
