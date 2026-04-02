@@ -40,6 +40,9 @@ export PATH="$PATH:$HOME/lib/flutter/bin"
 # dart/flutter pub installs executables into $HOME/.pub-cache/bin
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 
+# JAVA (eg. Flutter Android gradle support)
+# Java updates managed with brew, eg. `brew info openjdk`
+export JAVA_HOME="$(brew --prefix openjdk)/libexec/openjdk.jdk/Contents/Home"
 
 # R wattleclir package
 export PATH=$PATH:~/bin
