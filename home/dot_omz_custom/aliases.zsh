@@ -32,26 +32,50 @@ alias grepnr='grep -nr'
 
 # Locations
 # List
+# List - Desktop
+alias ldesk="ls -lt ~/Desktop"
+alias ldeskmore='ls -lt ~/Desktop |head -n 20'
+alias ldeskall='ls -lt ~/Desktop |more'
+# List - Documents
 alias ldocs="ls -lt ~/Documents"
+alias ldocsmore='ls -lt ~/Documents |head -n 20'
+alias ldocsall='ls -lt ~/Documents |more'
+# List - Downloads
 alias ldown='ls -lt ~/Downloads |head -n 7'
 alias ldownmore='ls -lt ~/Downloads |head -n 20'
 alias ldownall='ls -lt ~/Downloads |more'
+# List - OhMyZsh
 alias lomz="ls -l ~/.oh-my-zsh"
+# List - Meetings
+alias lmtgs="ls -lt ~/Documents/private/mtgs"
+# List - Notes
 alias lnotes="ls -lt ~/Documents/private/notes"
+# List - Website posts
 alias lposts="ls ~/Documents/jesscmoore.github.io/_posts"
+# List - Scripts
 alias lscripts='ls $HOME/bin'
-# Navigate
-alias cdocs='cd ~/Documents'
-alias cdown="cd ~/Downloads"
-alias cmtgs="cd ~/Documents/private/mtgs"
-alias cnotes="cd ~/Documents/private/notes"
-alias ctalks="cd ~/Documents/private/talks"
-alias comz="cd ~/.oh-my-zsh"
-alias cposts="cd ~/Documents/jesscmoore.github.io/_posts"
-alias cpriv='cd ~/Documents/private'
 
-# Tmp
-alias gotmp='mkdir -p tmp; cd tmp'
+# Navigate
+# Nav - Desktop
+alias cdesk="cd ~/Desktop"
+# Nav - Documents
+alias cdocs='cd ~/Documents'
+# Nav - Downloads
+alias cdown="cd ~/Downloads"
+# Nav - OhMyZsh
+alias comz="cd ~/.oh-my-zsh"
+# Nav - Meetings
+alias cmtgs="cd ~/Documents/private/mtgs"
+# Nav - Notes
+alias cnotes="cd ~/Documents/private/notes"
+# Nav - Talk notes
+alias ctalks="cd ~/Documents/private/talks"
+# Nav - Website posts
+alias cposts="cd ~/Documents/jesscmoore.github.io/_posts"
+# Nav - Private
+alias cpriv='cd ~/Documents/private'
+# Nav - Tmp
+alias ctmp='mkdir -p tmp; cd tmp'
 
 # Github - personal shorthand
 # Eg. git log --graph --left-right --cherry-pick --oneline dev...jess/572_perm_history
