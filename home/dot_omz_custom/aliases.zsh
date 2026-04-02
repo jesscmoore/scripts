@@ -3,7 +3,10 @@
 # User zsh aliases
 
 # Update aliases
-alias upaliases="cp ~/Documents/scripts/home/dot_omz_custom/aliases.zsh ~/.oh-my-zsh/custom/aliases.zsh"
+alias upaliases="cp ~/Documents/scripts/home/dot_omz_custom/aliases.zsh ~/.oh-my-zsh/custom/aliases.zsh && sz && echo 'Copied scripts/home/dot_omz_custom/aliases.zsh to ~/.oh-my-zsh/custom/aliases.zsh'"
+
+# Update macos custom settings
+alias upaliases_macos="cp ~/Documents/scripts/home/dot_omz_custom/os/mac.zsh ~/.oh-my-zsh/custom/os/mac.zsh  && sz && echo 'Copied scripts/home/dot_omz_custom/os/mac.zsh to ~/.oh-my-zsh/custom/os/mac.zsh'"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
