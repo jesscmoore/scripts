@@ -17,6 +17,9 @@ alias upaliases_macos="cp ~/Documents/scripts/home/dot_omz_custom/os/mac.zsh ~/.
 alias sz='source ~/.zshrc'
 alias zshconfig="cat ~/.zshrc | more"
 
+# Disk space
+alias large="du -sh * | sort -h && echo '\nAvailable disk space:' && df -h ."
+
 # ls
 alias ll='ls -la -G'
 alias lh='ls -lah -G'
