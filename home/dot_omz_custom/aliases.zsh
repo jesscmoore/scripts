@@ -33,21 +33,25 @@ alias grepnr='grep -nr'
 # Locations
 # List
 # List - Desktop
-alias ldesk="ls -lt ~/Desktop"
+alias ldesk="ls -lt ~/Desktop |head -n 7"
 alias ldeskmore='ls -lt ~/Desktop |head -n 20'
 alias ldeskall='ls -lt ~/Desktop |more'
+alias sdesk='du -sh ~/Desktop/* | sort -h'
 # List - Documents
 alias ldocs="ls -lt ~/Documents"
 alias ldocsmore='ls -lt ~/Documents |head -n 20'
 alias ldocsall='ls -lt ~/Documents |more'
+alias sdocs='du -sh ~/Documents/* | sort -h'
 # List - Downloads
 alias ldown='ls -lt ~/Downloads |head -n 7'
 alias ldownmore='ls -lt ~/Downloads |head -n 20'
 alias ldownall='ls -lt ~/Downloads |more'
+alias sdown='du -sh ~/Downloads/* | sort -h'
 # List - OhMyZsh
 alias lomz="ls -l ~/.oh-my-zsh"
 # List - Meetings
 alias lmtgs="ls -lt ~/Documents/private/mtgs"
+alias smtgs='du -sh ~/Documents/private/mtgs/* | sort -h'
 # List - Notes
 alias lnotes="ls -lt ~/Documents/private/notes"
 # List - Website posts
