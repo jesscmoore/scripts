@@ -10,8 +10,8 @@
 IFS=,
 declare -a FIELDS
 declare -a FOLDERS
-FIELDS=('ai' 'biod' 'kgraph' 'web' 'solid' 'disaster' 'indig' 'privacy' 'consent' 'db' 'govt' 'reading')
-FOLDERS=('ai' 'biodiversity' 'know_graphs' 'semantic_web' 'solid' 'disaster' 'indigenous' 'privacy' 'consent' 'database' 'govt' 'reading')
+FIELDS=('ai' 'biod' 'kgraph' 'web' 'solid' 'disaster' 'indig' 'privacy' 'consent' 'db' 'govt' 'reading' 'library')
+FOLDERS=('ai' 'biodiversity' 'know_graphs' 'semantic_web' 'solid' 'disaster' 'indigenous' 'privacy' 'consent' 'database' 'govt' 'reading' 'library')
 joined_fields="${FIELDS[*]}"
 
 function usage() {
