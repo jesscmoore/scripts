@@ -1,18 +1,18 @@
 #!/bin/bash
 #
-# Time-stamp: Wednesday 2026-03-18 14:28:16 Jess Moore
+# Time-stamp: Sunday 2026-04-12 09:52:33 Jess Moore
 #
 # Push local document to remote Nextcloud folder
 #
-# Usage: my_push.sh [args...]
+# Usage: my_pull.sh [args...]
 
 function usage() {
-    echo "Usage: my_push.sh [filename] [remotesubdir]"
+    echo "Usage: my_pull.sh [filename] [remotesubdir]"
     echo ""
-    echo "Description: Push local document to remote Nextcloud folder."
-    echo "This script pushs a local document to the local sync drive of"
-    echo "remote Nextcloud folder, ie. the subdirectory of Nextcloud folder."
-    echo "Check Nextcloud online afterwards to confirm syncing is up to date."
+    echo "Description: Pull local document from remote Nextcloud folder."
+    echo "This script pulls document from local sync drive of remote Nextcloud"
+    echo "folder. Check Nextcloud online afterwards to confirm syncing is up to"
+    echo "date."
     echo ""
     echo "Arguments:"
     echo "  filename:      Name of file (must include extension)."
@@ -42,28 +42,37 @@ else
     echo "Remote directory: ${REM_DIR}"
 fi
 
-# Check local file exists
-if [[ ! -e "$FILE" ]]; then
+# Check remote file exists
+if [[ ! -e "${REM_DIR}/$FILE" ]]; then
   echo "$FILE does not exist."
   exit 1
 fi
 
 if [[ "${user}" == "u9904893" ]]; then 
 
-    if [[ -f "${REM_DIR}/${FILE}" ]]; then 
-        echo "Backing up remote file to *.bak"
-        cp -p "${REM_DIR}/${FILE}" "${REM_DIR}/${FILE}.bak"
+    if [[ -f "${FILE}" ]]; then 
+        echo "Backing up local file to *.bak"
+        cp -p "${FILE}" "${FILE}.bak"
     fi
     
-    echo "Pushing to ${REM_DIR}..."    
-    cp -p "$FILE" "${REM_DIR}"/.
-    
-    echo "Files on Nextcloud:"
+     echo "Files on Nextcloud:"
     FILES_REM=$(find "${REM_DIR}" -name "${FILE}*")
     for f in $FILES_REM
     do
         ls -lt "$f"
     done
+    
+    while true; do
+        read -r -p "Do you wish to pull ${FILE} from Nextcloud?: " yn
+        case $yn in
+            [Yy]* ) echo "Proceeding..."; break;;
+            [Nn]* ) echo "Aborting..."; exit;;
+            * ) echo "Please answer y or n.";;
+        esac
+    done    
+    
+    echo "Pulling from ${REM_DIR}..."    
+    cp -p "${REM_DIR}/${FILE}" "${FILE}"
     
 fi
 
