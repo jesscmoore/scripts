@@ -37,7 +37,7 @@ FILENAME="${DATE_SUMM}-draftEmailTo-${PEOPLE_SUMM}.md"
 
 
 cat > "${FILENAME}" << EOF
-Cold email tips (Source: The Tim Ferris Show, 8/4/2026)
+Cold email tips (Source: The Tim Ferris Show, 8/4/2026, <https://tim.blog/podcast>, from 00:58:21)
 
 Subject: show your value, eg collaboration with Michelle Khare (XXXXX followers or XXXX views or collaborated with XYZ institutions)
 
