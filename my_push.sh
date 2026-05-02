@@ -3,11 +3,9 @@
 # Time-stamp: Sunday 2026-04-26 Jess Moore
 #
 # Push local document to a remote sync folder
-#
-# Usage: my_push.sh [-n|-p|-o folder] [filename] [remotesubdir]
 
 function usage() {
-    echo "Usage: my_push.sh [-n|-p|-o folder] [filename] [remotesubdir]"
+    echo "Usage: my_push.sh [-n|-p|-o folder] [remotesubdir] [filename]"
     echo ""
     echo "Description: Push local document to a remote sync folder."
     echo "This script copies a local document into a subdirectory of the"
@@ -45,8 +43,8 @@ if [[ -z "$BASE_DIR" || $# -ne 2 ]]; then
     usage
 fi
 
-FILE=$1
-REM_SUB_DIR=$2
+REM_SUB_DIR=$1
+FILE=$2
 
 # User
 user=$(whoami)

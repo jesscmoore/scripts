@@ -3,11 +3,9 @@
 # Time-stamp: Sunday 2026-04-26 Jess Moore
 #
 # Check how to share document or update local or remote of document
-#
-# Usage: update_doc.sh [-n|-p|-o folder] [filename] [remotesubdir]
 
 function usage() {
-    echo "Usage: update_doc.sh [-n|-p|-o folder] [filename] [remotesubdir]"
+    echo "Usage: update_doc.sh [-n|-p|-o folder] [remotesubdir] [filename]"
     echo ""
     echo "Description: Check how to share document or update local or remote of document."
     echo ""
@@ -43,8 +41,8 @@ if [[ -z "$BASE_DIR" || $# -ne 2 ]]; then
     usage
 fi
 
-FILE=$1
-REM_SUB_DIR=$2
+REM_SUB_DIR=$1
+FILE=$2
 
 
 # User

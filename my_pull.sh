@@ -3,11 +3,9 @@
 # Time-stamp: Sunday 2026-04-26 Jess Moore
 #
 # Pull local document from a remote sync folder
-#
-# Usage: my_pull.sh [-n|-p|-o folder] [filename] [remotesubdir]
 
 function usage() {
-    echo "Usage: my_pull.sh [-n|-p|-o folder] [filename] [remotesubdir]"
+    echo "Usage: my_pull.sh [-n|-p|-o folder] [remotesubdir] [filename]"
     echo ""
     echo "Description: Pull a document from a remote sync folder."
     echo "This script copies a document from a subdirectory of the chosen"
@@ -45,8 +43,8 @@ if [[ -z "$BASE_DIR" || $# -ne 2 ]]; then
     usage
 fi
 
-FILE=$1
-REM_SUB_DIR=$2
+REM_SUB_DIR=$1
+FILE=$2
 
 # User
 user=$(whoami)
