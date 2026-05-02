@@ -71,7 +71,7 @@ if [[ "${user}" != "u9904893" ]]; then
 fi
 
 
-MODTIME_REM=$(stat -f %Sm -t %Y%m%d%H%M%S "${REM_DIR}/$FILE")
+MODTIME_REM=$(stat -f %Sm -t "%Y-%m-%d %H:%M" "${REM_DIR}/$FILE")
 
 if [[ -f "${REM_DIR}/$FILE" ]]; then
     echo "Remote file $FILE: ${MODTIME_REM}"
@@ -79,7 +79,7 @@ else
     echo "Remote file $FILE does not yet exist"
 fi
 
-MODTIME_LOC=$(stat -f %Sm -t %Y%m%d%H%M%S "$FILE")
+MODTIME_LOC=$(stat -f %Sm -t "%Y-%m-%d %H:%M" "$FILE")
 # Extra white space for aligned modtimes
 echo "Local file  $FILE: ${MODTIME_LOC}"
 
