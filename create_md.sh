@@ -19,7 +19,7 @@ function usage() {
 }
 
 
-if [[ $# -ne 2 || $* == *"help"* || $* == *" -h "* ]]; then
+if [[ $# -ne 2 || $* == *"help "* || $* == *" -h "* ]]; then
     usage
 fi
 

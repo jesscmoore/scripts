@@ -16,7 +16,7 @@ function usage() {
 }
 
 # Print usage
-if [[ $* == *"help"* || $* == *"-h"* ]]; then
+if [[ $* == *"help "* || $* == *"-h"* ]]; then
     usage
 fi
 

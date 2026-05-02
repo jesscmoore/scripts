@@ -36,7 +36,7 @@ function usage() {
     exit 1 # Exit with a non-zero status to indicate an error
 }
 
-if [[ $* == *"help"* || $* == *"-h"* ]]; then
+if [[ $* == *"help "* || $* == *"-h"* ]]; then
     usage
 fi
 

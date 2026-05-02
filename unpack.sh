@@ -19,7 +19,7 @@ function usage() {
     exit 1 # Exit with a non-zero status to indicate an error
 }
 
-if [[ $# -lt 2 || $* == *"help"* || $* == *"-h"* || $# -gt 3 ]]; then
+if [[ $# -lt 2 || $* == *"help "* || $* == *"-h"* || $# -gt 3 ]]; then
     usage
 fi
 
