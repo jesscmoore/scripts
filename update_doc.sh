@@ -116,7 +116,7 @@ if [[ "$ACTION" == "pull" ]]; then
     while true; do
         read -r -p "Pull ${FILE} from remote now? [y/n]: " yn
         case $yn in
-            [Yy]* ) bash "${SCRIPT_DIR}/my_pull.sh" "${FLAG_ARG[@]}" "${FILE}" "${REM_SUB_DIR}"; break;;
+            [Yy]* ) bash "${SCRIPT_DIR}/my_pull" "${FLAG_ARG[@]}" "${FILE}" "${REM_SUB_DIR}"; break;;
             [Nn]* ) echo "Skipping."; break;;
             * ) echo "Please answer y or n.";;
         esac
@@ -125,7 +125,7 @@ elif [[ "$ACTION" == "push" ]]; then
     while true; do
         read -r -p "Push ${FILE} to remote now? [y/n]: " yn
         case $yn in
-            [Yy]* ) bash "${SCRIPT_DIR}/my_push.sh" "${FLAG_ARG[@]}" "${FILE}" "${REM_SUB_DIR}"; break;;
+            [Yy]* ) bash "${SCRIPT_DIR}/my_push" "${FLAG_ARG[@]}" "${FILE}" "${REM_SUB_DIR}"; break;;
             [Nn]* ) echo "Skipping."; break;;
             * ) echo "Please answer y or n.";;
         esac
