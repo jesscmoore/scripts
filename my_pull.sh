@@ -68,6 +68,7 @@ fi
 
 if [[ "${user}" == "u9904893" ]]; then
 
+    # Backup local file before overwrite
     if [[ -f "${FILE}" ]]; then
         echo "Backing up local file to *.bak"
         cp -p "${FILE}" "${FILE}.bak"
@@ -78,15 +79,6 @@ if [[ "${user}" == "u9904893" ]]; then
     for f in $FILES_REM
     do
         ls -lt "$f"
-    done
-
-    while true; do
-        read -r -p "Do you wish to pull ${FILE} from remote?: " yn
-        case $yn in
-            [Yy]* ) echo "Proceeding..."; break;;
-            [Nn]* ) echo "Aborting..."; exit;;
-            * ) echo "Please answer y or n.";;
-        esac
     done
 
     echo "Pulling from ${REM_DIR}..."
