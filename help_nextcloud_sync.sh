@@ -25,16 +25,15 @@
 # The green sync icon status on Nextcloud resources should 
 # return in the Nextcloud folder within Finder app
 #
+# To show active extensions
+# pluginkit -m | grep -i find 
+#
 # Usage: help_nextcloud_sync.sh [args...]
 
 function usage() {
-    echo "Usage: help_nextcloud_sync.sh [args...]"
+    echo "Usage: help_nextcloud_sync.sh"
     echo ""
     echo "Description: Stops Google FinderHelper which blocks Nextcloud client."
-    echo ""
-    echo "Arguments:"
-    echo "  arg1:      ..."
-    echo "  arg2:      ..."
     echo ""
     exit 1 # Exit with a non-zero status to indicate an error
 }
