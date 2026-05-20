@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # Time-stamp: Sunday 2026-04-26 Jess Moore
 #
@@ -15,6 +15,7 @@ function usage() {
     echo "Flags (exactly one required):"
     echo "  -n             Nextcloud folder  (~/Documents/Nextcloud)"
     echo "  -p             Private folder    (~/Documents/private)"
+    echo "  -s             Sharepoint folder (~/Australian National University)"
     echo "  -o folder      Other folder      (~/Documents/<folder>)"
     echo ""
     echo "Arguments:"
@@ -28,11 +29,12 @@ BASE_DIR=""
 
 [[ "$1" == "--help" ]] && usage
 
-while getopts ":hnpo:" opt; do
+while getopts ":hnpso:" opt; do
     case $opt in
         h) usage ;;
         n) BASE_DIR="${HOME}/Documents/Nextcloud" ;;
         p) BASE_DIR="${HOME}/Documents/private" ;;
+        s) BASE_DIR="${HOME}/Australian National University" ;;
         o) BASE_DIR="${HOME}/Documents/${OPTARG}" ;;
         *) usage ;;
     esac
@@ -43,7 +45,7 @@ if [[ -z "$BASE_DIR" || $# -ne 2 ]]; then
     usage
 fi
 
-REM_SUB_DIR=$1
+REM_SUB_DIR="$1"
 FILE=$2
 
 # User
@@ -51,7 +53,7 @@ user=$(whoami)
 REM_DIR="${BASE_DIR}/${REM_SUB_DIR}"
 
 # Check remote dir exists
-if [[ ! -d ${REM_DIR} ]]; then
+if [[ ! -d "${BASE_DIR}" ]]; then
     echo "Remote directory does not exist"
     exit 1
 else
@@ -75,19 +77,17 @@ if [[ "${user}" == "u9904893" ]]; then
     cp -p "$FILE" "${REM_DIR}"/.
 
     echo "Files on remote:"
-    FILES_REM=$(find "${REM_DIR}" -name "${FILE}*")
-    for f in $FILES_REM
-    do
-        ls -lt "$f"
+    mapfile -t FILES_REM < <(find "${REM_DIR}" -type f -name "${FILE}*")
+    for f in "${FILES_REM[@]}"; do
+        stat -l "$f"
     done
 
 fi
 
 echo "Done"
 
-FILES_LOC=$(find . -name "${FILE}*")
 echo "Local files:"
-for f in $FILES_LOC
-do
-	ls -lt "$f"
+mapfile -t FILES_LOC < <(find . -type f -name "${FILE}*")
+for f in "${FILES_LOC[@]}"; do
+    stat -l "$f"
 done

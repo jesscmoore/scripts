@@ -12,6 +12,7 @@ function usage() {
     echo "Flags (exactly one required):"
     echo "  -n             Nextcloud folder  (~/Documents/Nextcloud)"
     echo "  -p             Private folder    (~/Documents/private)"
+    echo "  -s             Sharepoint folder (~/Australian National University)"
     echo "  -o folder      Other folder      (~/Documents/<folder>)"
     echo ""
     echo "Arguments:"
@@ -26,11 +27,12 @@ FLAG_ARG=()
 
 [[ "$1" == "--help" ]] && usage
 
-while getopts ":hnpo:" opt; do
+while getopts ":hnpso:" opt; do
     case $opt in
         h) usage ;;
         n) BASE_DIR="${HOME}/Documents/Nextcloud"; FLAG_ARG=("-n") ;;
         p) BASE_DIR="${HOME}/Documents/private";   FLAG_ARG=("-p") ;;
+        s) BASE_DIR="${HOME}/Australian National University" ;;
         o) BASE_DIR="${HOME}/Documents/${OPTARG}"; FLAG_ARG=("-o" "${OPTARG}") ;;
         *) usage ;;
     esac
@@ -41,7 +43,7 @@ if [[ -z "$BASE_DIR" || $# -ne 2 ]]; then
     usage
 fi
 
-REM_SUB_DIR=$1
+REM_SUB_DIR="$1"
 FILE=$2
 
 
@@ -50,7 +52,7 @@ user=$(whoami)
 REM_DIR="${BASE_DIR}/${REM_SUB_DIR}"
 
 # Check remote dir exists
-if [[ ! -d ${REM_DIR} ]]; then
+if [[ ! -d "${REM_DIR}" ]]; then
     echo "Remote directory does not exist"
     exit 1
 else
@@ -98,14 +100,16 @@ echo "Remote files:"
 FILES_REM=$(find "${REM_DIR}" -name "${BASEFILE}*")
 for f in $FILES_REM
 do
-    ls -lt "$f"
+    stat "$f"
+    # ls -lt "$f"
 done
 
 echo "Local files:"
 FILES_LOC=$(find . -name "${BASEFILE}*" -depth)
 for f in $FILES_LOC
 do
-    ls -lt "$f"
+    stat "$f"
+    # ls -lt "$f"
 done
 
 SCRIPT_DIR="$(dirname "$0")"

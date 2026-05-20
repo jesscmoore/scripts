@@ -5,7 +5,7 @@
 # Pull local document from a remote sync folder
 
 function usage() {
-    echo "Usage: my_pull.sh [-n|-p|-o folder] [remotesubdir] [filename]"
+    echo "Usage: my_pull.sh [-n|-p|-s|-o folder] [remotesubdir] [filename]"
     echo ""
     echo "Description: Pull a document from a remote sync folder."
     echo "This script copies a document from a subdirectory of the chosen"
@@ -15,6 +15,7 @@ function usage() {
     echo "Flags (exactly one required):"
     echo "  -n             Nextcloud folder  (~/Documents/Nextcloud)"
     echo "  -p             Private folder    (~/Documents/private)"
+    echo "  -s             Sharepoint folder (~/Australian National University)"
     echo "  -o folder      Other folder      (~/Documents/<folder>)"
     echo ""
     echo "Arguments:"
@@ -28,11 +29,12 @@ BASE_DIR=""
 
 [[ "$1" == "--help" ]] && usage
 
-while getopts ":hnpo:" opt; do
+while getopts ":hnpso:" opt; do
     case $opt in
         h) usage ;;
         n) BASE_DIR="${HOME}/Documents/Nextcloud" ;;
         p) BASE_DIR="${HOME}/Documents/private" ;;
+        s) BASE_DIR="${HOME}/Australian\ National\ University" ;;
         o) BASE_DIR="${HOME}/Documents/${OPTARG}" ;;
         *) usage ;;
     esac
@@ -43,7 +45,7 @@ if [[ -z "$BASE_DIR" || $# -ne 2 ]]; then
     usage
 fi
 
-REM_SUB_DIR=$1
+REM_SUB_DIR="$1"
 FILE=$2
 
 # User
@@ -51,7 +53,7 @@ user=$(whoami)
 REM_DIR="${BASE_DIR}/${REM_SUB_DIR}"
 
 # Check remote dir exists
-if [[ ! -d ${REM_DIR} ]]; then
+if [[ ! -d "${REM_DIR}" ]]; then
     echo "Remote directory does not exist"
     exit 1
 else
@@ -73,10 +75,15 @@ if [[ "${user}" == "u9904893" ]]; then
     fi
 
     echo "Files on remote:"
-    FILES_REM=$(find "${REM_DIR}" -name "${FILE}*")
-    for f in $FILES_REM
-    do
-        ls -lt "$f"
+    # FILES_REM=$(find "${REM_DIR}" -name "${FILE}*")
+    # for f in $FILES_REM
+    # do
+    #     stat "$f"
+    #     # ls -lt "$f"
+    # done
+    mapfile -t FILES_REM < <(find "${REM_DIR}" -type f -name "${FILE}*")
+    for f in "${FILES_REM[@]}"; do
+        stat -l "$f"
     done
 
     echo "Pulling from ${REM_DIR}..."
@@ -86,9 +93,14 @@ fi
 
 echo "Done"
 
-FILES_LOC=$(find . -name "${FILE}*")
+# FILES_LOC=$(find . -name "${FILE}*")
 echo "Local files:"
-for f in $FILES_LOC
-do
-	ls -lt "$f"
+# for f in $FILES_LOC
+# do
+#     stat "$f"
+# 	# ls -lt "$f"
+# done
+mapfile -t FILES_LOC < <(find . -type f -name "${FILE}*")
+for f in "${FILES_LOC[@]}"; do
+    stat -l "$f"
 done
