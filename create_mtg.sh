@@ -97,8 +97,8 @@ cat > "${FILENAME}" << EOF
 
 ## Actions
 
-- Foo
-- Foo2
+- [ ] Foo
+- [ ] Foo
 
 ## Agenda
 
