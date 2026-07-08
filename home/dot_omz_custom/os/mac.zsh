@@ -50,7 +50,11 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
 
 # Python
-export PATH=/Library/Frameworks/Python.framework/Versions/3.11/bin:$PATH
+# [JM 07/07/2026: commented, as interfering with pyenv python environment set in ]
+# Ref: https://stackoverflow.com/questions/60212658/issues-with-pyenv-virtualenv-python-and-pip-not-changed-when-activating-deact
+# Setting PATH for Python 3.11
+# The original version is saved in .zprofile.pysave
+# export PATH=/Library/Frameworks/Python.framework/Versions/3.11/bin:$PATH
 
 # Latex
 eval "$(/usr/libexec/path_helper)"
