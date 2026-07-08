@@ -30,8 +30,8 @@ fi
 
 PWD=$(pwd)
 CURR_FOLDER=$(basename "$PWD")
-if [[ ${CURR_FOLDER != "${ENV_NAME}"} ]]; then
-    echo "Expects env_name ${ENV_NAME} to match current working directory and "
+if [[ ${CURR_FOLDER} != "${ENVNAME}" ]]; then
+    echo "Expects env_name ${ENVNAME} to match current working directory and "
     echo "top level of project."
     usage
 fi
@@ -51,4 +51,6 @@ pyenv virtualenv "${PYVER}" "${ENVNAME}"
 # Activate local environment in current directory
 pyenv local "${ENVNAME}"
 
+echo "Pyenv \"${ENVNAME}\" activated"
+echo "Use \"pyenv local --unset\" to unset"
 echo "Done."
