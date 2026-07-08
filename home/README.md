@@ -14,10 +14,10 @@ To search aliases, run `alias | grep [query]`
 
 To update personal aliases:
 
-1. edit ~/Documents/scripts/home/dot_omz_custom/aliases.zsh
+1. edit `~/Documents/scripts/home/dot_omz_custom/aliases.zsh`
 2. Run `upaliases`
 
-Note: `upaliases` is an alias for copying the alias file to my .oh-my-zsh custom folder in my home directory and sourcing my dot zshrc.
+Note: `upaliases` is an alias for copying the alias file to my .`oh-my-zsh` custom folder in my home directory and sourcing my `.zshrc`.
 
 ### Finding aliases
 
