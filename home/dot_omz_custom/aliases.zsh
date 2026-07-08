@@ -89,3 +89,21 @@ alias ctmp='mkdir -p tmp; cd tmp'
 alias glc="git log --graph --left-right --cherry-pick --oneline"
 # Compressed git log with tags
 alias glgt="git log --pretty=oneline --abbrev-commit"
+
+# Custom script finding
+# Find alias
+alias findal="alias | grep"
+# Find py related custom scripts
+alias findpy="ll ~/bin | grep py"
+# Find custom scripts containing query as argument eg. findbash tag
+alias findbash="ll ~/bin | grep"
+
+# Python related
+# List available versions
+alias pylist="pyenv install --list"
+# Show installed versions
+alias pyvers="pyenv versions"
+# Show default installed version
+alias pyver="pyenv version"
+# Unset pyenv environment
+alias pyunset="pyenv local --unset"
